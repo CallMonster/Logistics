@@ -1,0 +1,42 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.utils.ToastUtils;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class IdeaModel implements View.OnClickListener{
+    public EditText editText;
+    public RelativeLayout ideaNavLayout;
+    public TextView ideaCommitBtn;
+    private BaseActivity ac;
+
+    public void findViewByIds(BaseActivity activity){
+        this.ac = activity;
+        editText = (EditText)activity.findViewById(R.id.idea_edit);
+        ideaNavLayout = (RelativeLayout)activity.findViewById(R.id.idea_nav_layout);
+
+        ideaNavLayout.setBackgroundResource(R.color.colorWhite);
+        ideaCommitBtn = (TextView)activity.findViewById(R.id.idea_commit_btn);
+        ideaCommitBtn.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.idea_commit_btn:
+                ToastUtils.showSuccess(ac,"反馈问题已提交，谢谢");
+                ac.finish();
+                break;
+        }
+    }
+}

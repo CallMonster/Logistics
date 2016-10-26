@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="160dp"
+    android:layout_height="45dp"
+    android:background="@color/colorWhite"
+    android:layout_gravity="center">
+    <TextView android:id="@+id/custom_tab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_14"
+        android:textColor="@drawable/tab_text_selector"
+        android:text="我的老家"
+        android:layout_centerInParent="true"/>
+    <ImageView android:layout_marginTop="@dimen/space_5"
+        android:id="@+id/custom_tab_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/tab_indicator"
+        android:layout_below="@id/custom_tab_text"
+        android:layout_centerHorizontal="true"/>
+    <TextView android:id="@+id/custom_tab_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/badge_selector"
+        android:text="10"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:textSize="@dimen/font_12"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/custom_tab_text"
+        android:layout_marginLeft="@dimen/space_5"
+        android:paddingLeft="@dimen/space_5"
+        android:paddingTop="@dimen/space_1"
+        android:paddingBottom="@dimen/space_1"
+        android:paddingRight="@dimen/space_5"/>
+</RelativeLayout>

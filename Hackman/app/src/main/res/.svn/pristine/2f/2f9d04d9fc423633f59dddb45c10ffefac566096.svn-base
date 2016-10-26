@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/drak_transparent"
+    android:fitsSystemWindows="true">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/about_us_nav"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="96dp">
+            <RelativeLayout android:id="@+id/label43"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@mipmap/home_icon_bg"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin">
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:src="@mipmap/logo"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_toRightOf="@id/label43"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin">
+                <TextView android:id="@+id/label44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正通物流"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorBlack"/>
+                <TextView android:layout_below="@id/label44"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正通物流配送有限公司"
+                    android:textSize="14sp"
+                    android:layout_marginTop="@dimen/space_8"
+                    android:textColor="@color/home_grey"
+                    />
+            </RelativeLayout>
+        </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/about_us"
+                android:textSize="14sp"
+                android:inputType="textMultiLine"/>
+        </ScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>

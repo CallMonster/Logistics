@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!--button_sheet样式-->
+    <style name="buttonSheetWindowStyle" parent="android:style/Theme.Dialog">
+        <item name="android:windowBackground">@drawable/button_sheet_choose_bg</item>
+    </style>
+
+    <!--button_sheet动画-->
+    <style name="button_sheet_animstyle">
+        <item name="android:windowEnterAnimation">@anim/button_sheet_in</item>
+        <item name="android:windowExitAnimation">@anim/button_sheet_out</item>
+    </style>
+
+</resources>

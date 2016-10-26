@@ -1,0 +1,43 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.adapter.TurnOverAdapter;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class MyWalletModel implements View.OnClickListener{
+    public TextView balanceText,notBalanceText;
+    public RelativeLayout withdraw_deposit_layout;
+    public ListView turnOverListView;
+
+    public void findViewByIds(Activity activity){
+        balanceText = (TextView) activity.findViewById(R.id.my_wallet_nums_text);
+        notBalanceText = (TextView)activity.findViewById(R.id.my_wallet_no_nums_text);
+        withdraw_deposit_layout = (RelativeLayout) activity.findViewById(R.id.withdraw_deposit_layout);
+        turnOverListView = (ListView)activity.findViewById(R.id.my_wallet_list_view);
+
+        withdraw_deposit_layout.setOnClickListener(this);
+    }
+
+    public void initView(TurnOverAdapter adapter){
+        turnOverListView .setAdapter(adapter);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.withdraw_deposit_layout:
+
+                break;
+        }
+    }
+}

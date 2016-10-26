@@ -1,0 +1,79 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.zt.hackman.R;
+import com.zt.hackman.activity.ActionDetailsActivity;
+import com.zt.hackman.activity.OrderDetailReciverActivity;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.adapter.NewsAdapter;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.response.MyOrderResponse;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/26.
+ */
+public class NewsListModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener{
+    public ExpendRecycleView recycleView;
+    public SwipeRefreshLoadMore loadMore;
+    public RelativeLayout navLayout;
+    private BaseActivity activity;
+
+    public void findViewByIds(BaseActivity activity){
+        this.activity =activity;
+        recycleView = (ExpendRecycleView)activity.findViewById(R.id.order_list_view);
+        loadMore = (SwipeRefreshLoadMore)activity.findViewById(R.id.order_swipe_more);
+        navLayout = (RelativeLayout)activity.findViewById(R.id.news_list_nav);
+        navLayout.setBackgroundResource(R.color.colorWhite);
+    }
+
+    public void init(Activity activity, List<HomeResponse.News> datas){
+        loadMore.setColorSchemeColors(new int[]{R.color.tab_seleted});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recycleView.setLayoutManager(linearLayoutManager);
+        AbsRVAdapter<HomeResponse.News> adapter = new AbsRVAdapter<HomeResponse.News>
+                (recycleView, datas, R.layout.adapter_news) {
+            @Override
+            public void showData(ViewHolder vHolder, HomeResponse.News data, int position) {
+
+            }
+
+        };
+        adapter.setOnItemClickListener(new AbsRVAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent =new Intent(NewsListModel.this.activity,ActionDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.INTNENTS.INTENT_ACTION_ID,position);
+                intent.putExtras(bundle);
+                NewsListModel.this.activity.startActivity(intent);
+            }
+        });
+        recycleView.setAdapter(adapter);
+        loadMore.setOnRefreshListener(this);
+        loadMore.setOnLoadListener(this);
+        this.onRefresh();
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+}

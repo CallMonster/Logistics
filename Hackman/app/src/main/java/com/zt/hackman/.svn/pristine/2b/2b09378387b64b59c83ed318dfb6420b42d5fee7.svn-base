@@ -1,0 +1,78 @@
+package com.zt.hackman.activity;
+
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.view.View;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+import com.zt.hackman.model.HackmanModel;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.utils.ToastUtils;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class EditHackmanTwoActivity extends BaseActivity implements LeftListener,RightListener,View.OnClickListener{
+
+    NavModel navModel;
+    HackmanModel model;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_hackman_two);
+        initNavBar();
+        findViewByIds();
+        initView();
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(this);
+        navModel.setLeftListener(this);
+        navModel.setRightListener(this);
+        navModel.setLeftBtn(R.mipmap.main_back);
+        navModel.setTitle("车辆信息");
+        navModel.setRightBtn("提交审核");
+    }
+
+    @Override
+    protected void findViewByIds() {
+
+    }
+
+    @Override
+    protected void initView() {
+        model = new HackmanModel(this,this,2);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void leftClick() {
+        finish();
+    }
+
+
+    @Override
+    public void rightClick() {
+        ToastUtils.showSuccess(this,"实名资料已提交");
+        this.finish();
+        startActivity(MainActivity.class);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.watch_hackman_clause_btn:
+                startActivity(HackmanClauseActivity.class);
+                break;
+        }
+    }
+}

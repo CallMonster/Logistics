@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/drak_transparent">
+        <LinearLayout android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/grey_low">
+            <include layout="@layout/nav_layout"
+                android:id="@+id/question_nav_layout"/>
+            <LinearLayout android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout android:id="@+id/choose_question_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@color/colorWhite"
+                    android:layout_marginTop="@dimen/space_8">
+                    <TextView android:id="@+id/label42"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="请选择遇到的问题"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:textColor="@color/grey_normal"
+                        android:textSize="@dimen/font_12"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorAccent"
+                        android:text=" (必填)"
+                        android:layout_toRightOf="@id/label42"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/font_12"/>
+                    <ImageView android:id="@+id/label50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/derection_icon"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        />
+                    <TextView android:layout_toLeftOf="@id/label50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/question_des_text"
+                        android:layout_marginRight="@dimen/space_5"
+                        android:textColor="@color/grey_normal"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/font_14"/>
+                </RelativeLayout>
+
+                <LinearLayout android:id="@+id/question_container"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/space_8">
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView android:id="@+id/commit_question_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_50"
+            android:text="提交问题"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:background="@color/tab_seleted"/>
+
+    </LinearLayout>

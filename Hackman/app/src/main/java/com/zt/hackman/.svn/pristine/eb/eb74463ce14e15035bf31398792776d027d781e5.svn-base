@@ -1,0 +1,20 @@
+package com.zt.hackman.model;
+
+import android.widget.RelativeLayout;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+
+/**
+ * Created by Administrator on 2016/9/30.
+ */
+public class ActionDetailsModel {
+    public RelativeLayout navLayout;
+    private BaseActivity ac;
+
+    public void findViewByIds(BaseActivity ac){
+        this.ac = ac;
+        navLayout = (RelativeLayout) ac.findViewById(R.id.action_detials_nav);
+        navLayout.setBackgroundResource(R.color.colorWhite);
+    }
+}

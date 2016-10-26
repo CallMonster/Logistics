@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.zt.hackman.base.widget.ProgressActivity
+        android:id="@+id/myorder_progressActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:emptyBackgroundColor="@color/grey_low"
+        app:errorBackgroundColor="@color/grey_low"
+        app:loadingBackgroundColor="@color/grey_low"
+        app:emptyImageHeight="52dp"
+        app:emptyImageWidth="54dp"
+        app:loadingProgressBarHeight="45dp"
+        app:loadingProgressBarWidth="45dp"
+        app:errorImageHeight="52dp"
+        android:layout_weight="1"
+        app:errorImageWidth="54dp">
+
+        <com.zt.hackman.view.SwipeRefreshLoadMore
+            android:id="@+id/order_swipe_more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.zt.hackman.view.ExpendRecycleView
+                android:id="@+id/order_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"/>
+        </com.zt.hackman.view.SwipeRefreshLoadMore>
+
+    </com.zt.hackman.base.widget.ProgressActivity>
+
+</LinearLayout>

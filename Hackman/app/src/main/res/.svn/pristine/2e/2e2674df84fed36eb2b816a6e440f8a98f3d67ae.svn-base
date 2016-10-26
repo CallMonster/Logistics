@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <drawable name="tint_bg">#000000</drawable>
+    <drawable name="transport">#00000000</drawable>
+
+    <color name="transparent">#00000000</color>
+    <color name="drak_transparent">#10000000</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorGrey">#CCCCCC</color>
+    <color name="movement_color">#17213d</color>
+
+
+    <!-- 图片选择-->
+    <color name="color_photo_bg">#CCCCCC</color>
+    <color name="theme_body">#cc22292c</color>
+    <color name="status_bar">#303135</color>
+    <color name="top_bar">#9f556061</color>
+    <color name="holo_blue_bright">#ff00ddff</color>
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <color name="holo_green_light">#ff99cc00</color>
+    <color name="holo_green_dark">#ff669900</color>
+    <color name="holo_purple">#ffaa66cc</color>
+    <color name="holo_orange_dark">#ffff8800</color>
+    <color name="darker_gray">#aaa</color>
+
+    <color name="grid_bg">#FFFFFFFF</color>
+    <color name="grid_border">#FFC6C6C6</color>
+    <color name="tab_seleted">#4862fe</color>
+    <color name="tab_normal">#17213d</color>
+    <color name="grey_normal">#333333</color>
+    <color name="grey_low">#F0F3FA</color>
+    <color name="home_grey">#BABABA</color>
+    <color name="photo_bg">#E7E8EB</color>
+
+    <color name="wheel_bg">#D1D5DB</color>
+    <color name="wheel_line">#AAADB1</color>
+    <color name="wheel_unselected_text">#BDC0C6</color>
+    <color name="wheel_selected_text">#3D3E40</color>
+    <color name="grey_66">#999999</color>
+    <color name="scan_color">#B0B0B2</color>
+</resources>

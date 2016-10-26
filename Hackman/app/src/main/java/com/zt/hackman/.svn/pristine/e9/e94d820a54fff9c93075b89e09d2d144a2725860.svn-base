@@ -1,0 +1,25 @@
+package com.zt.hackman.adapter;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.CyBaseAdapter;
+import com.zt.hackman.response.DepositResponse;
+
+/**
+ * Created by Administrator on 2016/9/26.
+ */
+public class BankCardAdapter extends CyBaseAdapter<DepositResponse.BankCard> {
+
+    public BankCardAdapter(Context context) {
+        super(context);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        convertView = inflater.inflate(R.layout.adapter_deposit_layout,parent,false);
+        return convertView;
+    }
+}

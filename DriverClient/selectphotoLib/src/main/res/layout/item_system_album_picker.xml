@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/imgThun"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/img_loading_bg"
+        android:clickable="false"
+        android:focusable="false"
+        android:background="@color/sc_loading_bg_color"
+        android:scaleType="centerInside" />
+
+</FrameLayout>
+
+
+
+
+
+
+
+

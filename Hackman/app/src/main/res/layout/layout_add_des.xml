@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <EditText android:id="@+id/question_des_edit"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorWhite"
+        android:textColor="@color/home_grey"
+        android:layout_marginTop="@dimen/space_8"
+        android:hint="请输入您的问题描述"
+        android:paddingTop="5dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="5dp"
+        android:inputType="textMultiLine"
+        android:textSize="@dimen/font_14"
+        android:gravity="left"/>
+
+    <RelativeLayout android:layout_marginTop="@dimen/space_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:paddingBottom="@dimen/space_15">
+        <TextView android:id="@+id/label4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="添加图片(添加图片更能说明问题)"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/space_15"
+            android:textSize="@dimen/font_14"/>
+        <GridView android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/space_15"
+            android:id="@+id/question_photo_grid_view"
+            android:layout_below="@id/label4"
+            android:horizontalSpacing="@dimen/space_1"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:numColumns="4"
+            android:scrollbars="none"/>
+    </RelativeLayout>
+</LinearLayout>

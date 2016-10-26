@@ -1,0 +1,90 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        
+    </style>
+
+    <style name="main" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowIsTranslucent">false</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="login_text">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    
+    <style name="login_edit">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="tab_button_style">
+        <item name="android:textColor">@drawable/tab_text_selector</item>
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:button">@null</item>
+        <item name="android:paddingTop">@dimen/space_8</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!--个人中心文本样式-->
+    <style name="my_text_style">
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/space_10</item>
+        <item name="android:layout_centerVertical">true</item>
+
+    </style>
+    <!-- pop窗口弹出动画 -->
+    <style name="AnimationWindow">
+        <item name="android:windowEnterAnimation">@anim/window_slide_in_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/window_slide_out_from_bottom</item>
+    </style>
+
+    <!--个人中心图标样式-->
+    <style name="my_icon_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+    <!--个人中心文本样式-->
+    <style name="my_derection_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:src">@mipmap/derection_icon</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="main_edit">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_12</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="main_text">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/font_14</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+</resources>

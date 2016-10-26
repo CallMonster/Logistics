@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/fragment_code_layout"/>
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_low">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <cn.bingoogolapple.qrcode.zxing.ZXingView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/zxingview"
+                app:qrcv_barcodeRectHeight="220dp"
+                app:qrcv_borderColor="@android:color/transparent"
+                app:qrcv_borderSize="1dp"
+                android:layout_centerInParent="true"
+                app:qrcv_cornerColor="@color/tab_seleted"
+                app:qrcv_customGridScanLineDrawable="@mipmap/custom_grid_scan_line"
+                app:qrcv_cornerLength="20dp"
+                app:qrcv_cornerSize="3dp"
+                app:qrcv_isBarcode="false"
+                app:qrcv_isOnlyDecodeScanBoxArea="true"
+                app:qrcv_isScanLineReverse="true"
+                app:qrcv_isShowDefaultGridScanLineDrawable="true"
+                app:qrcv_isShowDefaultScanLineDrawable="false"
+                app:qrcv_isShowTipBackground="true"
+                app:qrcv_isShowTipTextAsSingleLine="false"
+                app:qrcv_isTipTextBelowRect="false"
+                app:qrcv_maskColor="@color/colorBlack"
+                app:qrcv_scanLineColor="@color/transparent"
+                app:qrcv_scanLineSize="1dp"
+                app:qrcv_tipTextColor="@android:color/white"
+                app:qrcv_tipTextSize="12sp"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+            <TextView android:id="@+id/label46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="您还没有扫描二维码"
+                android:layout_marginTop="45dp"
+                android:textColor="@color/scan_color"/>
+
+            <TextView android:layout_below="@id/label46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="扫描车上的二维码确认上线"
+                android:textColor="@color/scan_color"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

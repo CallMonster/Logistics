@@ -1,0 +1,17 @@
+package com.zt.hackman.utils;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+
+/**
+ * Created by Administrator on 2016/9/23.
+ */
+public class SystemUtils {
+    public static void call(String a, Activity activity){
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + a);
+        intent.setData(data);
+        activity.startActivity(intent);
+    }
+}

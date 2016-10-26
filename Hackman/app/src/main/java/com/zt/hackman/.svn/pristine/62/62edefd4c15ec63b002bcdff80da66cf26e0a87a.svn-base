@@ -1,0 +1,315 @@
+package com.zt.hackman.model;
+
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.https.HttpsUtils;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.EditHackmanTwoActivity;
+import com.zt.hackman.activity.MainActivity;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.base.BaseApp;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.HackmanResponse;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.PreferencesUtils;
+import com.zt.hackman.utils.StringUtils;
+import com.zt.hackman.utils.ToastUtils;
+import com.zt.hackman.view.AlertLoadingDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
+
+/**
+ * Created by Administrator on 2016/9/19.
+ */
+public class HackmanModel{
+    public HackmanResponse response;
+
+    private HackRequest request;
+    //界面一
+    public RelativeLayout oneFrontBtn,oneReserveBtn,navOne,
+            driving_licence_photo_btn,driving_licence_photo_btn2,
+            business_certificate_photo_btn;
+    BaseActivity ac;
+    public EditText userNameEdit,companyNoEdit,idenNoEdit;
+    private AlertLoadingDialog dialog;
+
+    //界面二
+    public CheckBox checkBox;
+    public TextView watchClauseBtn;
+    public RelativeLayout navTwo;
+
+    private int isCheck=0;
+
+    public RelativeLayout vehicleBtn ,operationLicenseBtn;
+    public RelativeLayout vehicleLicenseBtn,
+            vehicleLicenseBtn2;
+
+
+    public HackmanModel(BaseActivity activity, View.OnClickListener listener,int current){
+        this.ac = activity;
+        switch (current){
+            case 1:
+                initOne(listener);
+                break;
+            case 2:
+                initTwo(listener);
+                break;
+        }
+    }
+    /**
+     * 初始化司机信息1
+     * @param listener
+     */
+    private void initOne( View.OnClickListener listener){
+        oneFrontBtn = (RelativeLayout)ac.findViewById(R.id.oneFrontBtn);
+        oneReserveBtn = (RelativeLayout)ac.findViewById(R.id.oneReserveBtn);
+        navOne=(RelativeLayout)ac.findViewById(R.id.hackman_one_layout) ;
+        navOne.setBackgroundResource(R.color.colorWhite);
+        driving_licence_photo_btn = (RelativeLayout) ac.findViewById(R.id.driving_licence_photo_btn);
+        driving_licence_photo_btn2 = (RelativeLayout)ac.findViewById(R.id.driving_licence_photo_btn_2);
+        business_certificate_photo_btn = (RelativeLayout) ac.findViewById(R.id.business_certificate_photo_btn);
+        userNameEdit = (EditText)ac.findViewById(R.id.oneUserName);
+        companyNoEdit = (EditText)ac.findViewById(R.id.oneEnNumberText);
+        idenNoEdit = (EditText)ac.findViewById(R.id.oneIdenNumber);
+
+        oneFrontBtn.setOnClickListener(listener);
+        oneReserveBtn.setOnClickListener(listener);
+
+        initChoose();
+
+    }
+
+    /**
+     * 初始化界面
+     */
+    private void initChoose(){
+        initImage(oneFrontBtn,"正面");
+        initImage(oneReserveBtn,"反面");
+        initImage(driving_licence_photo_btn,"(正本)");
+        initImage(driving_licence_photo_btn2,"(副本)");
+        initImage(business_certificate_photo_btn,null);
+    }
+
+    /**
+     * 初始化营业执照
+     */
+    private void initImage(RelativeLayout btn,String text){
+        View view =  LayoutInflater.from(ac).inflate(R.layout.layout_front_one,btn,false);
+        ImageView imageView =(ImageView)view.findViewById(R.id.layout_one_img);
+        TextView textView = (TextView)view.findViewById(R.id.layout_one_text);
+        if(textView==null){
+            textView.setVisibility(View.GONE);
+        }else{
+            textView.setText(text);
+        }
+        btn.addView(view);
+    }
+
+    /**
+     * 设置驾驶证副本图片
+     */
+    public void changeImage(ImageItem item,int current,RelativeLayout btn){
+
+        btn.removeAllViews();
+        ImageView imageView = new ImageView(ac);
+        imageView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        btn.addView(imageView);
+        ImageLoader.getInstance().displayImage("file://"+item.path,imageView,BaseApp.options);
+        switch (current){
+            case 1:
+                response.idenFrontImage = new File(item.path);
+                break;
+            case 2:
+                response.idenReserveImage = new File(item.path);
+                break;
+            case 3:
+                response.driveImage = new File(item.path);
+                break;
+            case 4:
+                response.driveImage2 = new File(item.path);
+                break;
+            case 5:
+                response.doBusinessImage = new File(item.path);
+                break;
+        }
+
+    }
+
+    /**
+     * 上传认证
+     */
+    public void uploadAuditor() throws JSONException {
+
+        String userName = userNameEdit.getText().toString();
+        String companyNo = companyNoEdit.getText().toString();
+        String idenNo = idenNoEdit.getText().toString();
+        if(userName==null|| StringUtils.isEmpty(userName)){
+            Toast.makeText(ac,"用户姓名不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }else if(idenNo==null||StringUtils.isEmpty(idenNo)){
+            Toast.makeText(ac,"身份证信息不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        response.hackName = userName;
+        response.companyNo = companyNo;
+        response.idenNo = idenNo;
+        request = new HackRequest();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("command","driverMessage");
+        jsonObject.put("dName",userName);
+        jsonObject.put("cooperationId","QY020161010100005");
+
+
+        HackmanResponse.FileParams params = new HackmanResponse.FileParams();
+        params.file = response.idenFrontImage;
+        params.name = "idCardFrontImg";
+        if(params.file==null){
+            Toast.makeText(ac,"请上传身份证正面照片",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
+        HackmanResponse.FileParams params1 = new HackmanResponse.FileParams();
+        params1.file = response.idenReserveImage;
+        if(params1.file==null){
+            Toast.makeText(ac,"请上传身份证反面照片",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        params1.name = "idCardBackImg";
+
+        HackmanResponse.FileParams params2 = new HackmanResponse.FileParams();
+        params2.file = response.driveImage;
+        params2.name = "DLImg";
+        if(params2.file==null){
+            Toast.makeText(ac,"请上传驾驶证正本照片",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        HackmanResponse.FileParams params3 = new HackmanResponse.FileParams();
+        params3.file = response.driveImage2;
+        params3.name = "DLImg2";
+        if(params3.file==null){
+            Toast.makeText(ac,"请上传驾驶证副本照片",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        HackmanResponse.FileParams params4 = new HackmanResponse.FileParams();
+        params4.file = response.doBusinessImage;
+        params4.name = "professionImg";
+        if(params1.file==null){
+            Toast.makeText(ac,"请上传营运证照片照片",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ArrayList<HackmanResponse.FileParams> fileParamses
+                = new ArrayList<HackmanResponse.FileParams>();
+
+        fileParamses.add(params);
+        fileParamses.add(params1);
+        fileParamses.add(params2);
+        fileParamses.add(params3);
+        fileParamses.add(params4);
+        if(companyNo==null||StringUtils.isEmpty(companyNo)){
+            //PreferencesUtils.putComplexObject(ac, Constant.PREFERENCE_KEY.KEY_HACK_RESPONSE,response);
+            ac.startActivity(EditHackmanTwoActivity.class);
+        }else {
+            dialog = ToastUtils.showLoading(ac, "资料提交中");
+            jsonObject.put("idCardNum",companyNo);
+            request.requestFileAndParams(jsonObject.toString(), fileParamses, Constant.TEST_HOST, new StringCallback() {
+                @Override
+                public void onError(Request request, Exception e) {
+                    dialog.dismiss();
+                    Toast.makeText(ac, "上传失败", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onResponse(String response) {
+                    dialog.dismiss();
+                    Response res = new Response(response, ac);
+                    if(res.code>0){
+                        ToastUtils.showSuccess(ac, res.msg);
+                        ac.startActivity(MainActivity.class);
+                        ac.finish();
+                    }else{
+                        Toast.makeText(ac,res.msg,Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+        }
+    }
+
+    /**
+     * 初始化司机信息2
+     * @param listener
+     */
+    private void initTwo(View.OnClickListener listener){
+        checkBox =(CheckBox) ac.findViewById(R.id.agreeCheck);
+        watchClauseBtn = (TextView)ac.findViewById(R.id.watch_hackman_clause_btn);
+        navTwo=(RelativeLayout)ac.findViewById(R.id.hackman_two_layout) ;
+        navTwo.setBackgroundResource(R.color.colorWhite);
+
+        checkBox.setChecked(true);
+        watchClauseBtn.setOnClickListener(listener);
+        vehicleBtn = (RelativeLayout) ac.findViewById(R.id.two_first_btn);
+        operationLicenseBtn = (RelativeLayout) ac.findViewById(R.id.two_four_btn);
+
+        vehicleLicenseBtn = (RelativeLayout)ac.findViewById(R.id.two_second_btn);
+        vehicleLicenseBtn2 = (RelativeLayout)ac.findViewById(R.id.two_third_btn);
+
+        vehicleBtn.setOnClickListener(listener);
+        operationLicenseBtn.setOnClickListener(listener);
+        vehicleLicenseBtn.setOnClickListener(listener);
+        vehicleLicenseBtn2.setOnClickListener(listener);
+
+        initImage(vehicleBtn,null);
+        initImage(vehicleLicenseBtn,"(正本)");
+        initImage(vehicleLicenseBtn2,"(副本)");
+        initImage(operationLicenseBtn,null);
+
+    }
+
+    public void clearOne(){
+        oneFrontBtn = null;
+        oneReserveBtn = null;
+        navOne = null;
+        ac = null;
+        driving_licence_photo_btn = null;
+        business_certificate_photo_btn = null;
+        userNameEdit = null;
+        companyNoEdit = null;
+        idenNoEdit = null;
+    }
+
+    public void clearTwo(){
+        vehicleBtn = null;
+    }
+
+
+}

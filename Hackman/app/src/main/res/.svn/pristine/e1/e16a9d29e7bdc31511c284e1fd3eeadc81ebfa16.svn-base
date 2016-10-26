@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/grey_low">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/deposit_nav_layout"/>
+        <ListView android:id="@+id/bank_card_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"/>
+        
+        <RelativeLayout android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="134dp"
+            android:background="@color/colorWhite">
+            <TextView android:id="@+id/label15"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:text="提现金额"
+                android:textColor="@color/home_grey"
+                android:textSize="@dimen/font_12"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:gravity="center_vertical"/>
+
+            <TextView android:layout_below="@id/label15"
+                android:id="@+id/deposit_money_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥99900.0"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_16"
+                android:layout_marginTop="@dimen/space_8"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+            <TextView android:id="@+id/can_deposit_money_text"
+                android:layout_below="@id/deposit_money_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="可提现金额999元"
+                android:textColor="@color/home_grey"
+                android:layout_marginTop="@dimen/space_15"
+                android:textSize="@dimen/font_12"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView android:id="@+id/deposit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="立即提现"
+        android:background="@color/tab_seleted"
+        android:gravity="center"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/colorWhite"/>
+</LinearLayout>

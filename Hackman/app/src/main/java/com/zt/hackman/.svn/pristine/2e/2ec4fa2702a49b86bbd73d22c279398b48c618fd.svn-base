@@ -1,0 +1,110 @@
+package com.zt.hackman.activity;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+import com.zt.hackman.model.LoginModel;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.utils.StatusUtils;
+
+/**
+ * Created by Administrator on 2016/9/13.
+ */
+public class LoginActivity extends Activity
+        implements View.OnClickListener{
+    private LoginModel model;
+    private TextView loginBtn;
+    private TextView showText;
+    private TextView forgetBtn;
+
+
+    //判断图片是否在旋转中，0为旋转，1为非旋转
+    private int isRotate;
+    //0为密码状态，1为非密码状态
+    private int current = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        initStatus();
+        setContentView(R.layout.activity_login);
+
+        findViewByIds();
+        initNav();
+    }
+    /**
+     * 初始化状态栏
+     */
+    private void  initStatus(){
+        StatusUtils.changeStatus(this);
+    }
+
+    private void findViewByIds(){
+        model = new LoginModel();
+        model.loginId = (TextView)findViewById(R.id.login_id_text);
+        model.loginPwd = (TextView)findViewById(R.id.login_pwd_text);
+        showText = (TextView)findViewById(R.id.show_pwd_btn);
+        loginBtn = (TextView)findViewById(R.id.login_btn);
+        model.leftClick = (ImageView)findViewById(R.id.left_img);
+        model.rightClick = (TextView)findViewById(R.id.right_btn);
+
+        model.leftClick.setOnClickListener(this);
+        loginBtn.setOnClickListener(this);
+        showText.setOnClickListener(this);
+        model.leftClick.setOnClickListener(this);
+        model.rightClick.setOnClickListener(this);
+    }
+
+    private void initNav(){
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch(v.getId()){
+            case R.id.login_btn:
+                loginBtn.setBackgroundResource(R.mipmap.logining);
+                loginBtn.startAnimation(AnimationUtils.loadAnimation(this,R.anim.rotate_anim));
+
+                intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+
+                //清除model里的数据
+                model.clear();
+                finish();
+                break;
+            case R.id.show_pwd_btn:
+                if(current==0){  //密码状态改为非密码状态
+                    model.loginPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    current =1;
+                    showText.setText("隐藏");
+                }else if(current ==1){  //非密码状态改为密码状态
+                    model.loginPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    current = 0;
+                    showText.setText("显示");
+                }
+                break;
+            case R.id.left_img:
+                finish();
+                break;
+            case R.id.right_btn:
+                startActivity(new Intent(this,ForgetPwdActivity.class));
+                break;
+        }
+    }
+
+}

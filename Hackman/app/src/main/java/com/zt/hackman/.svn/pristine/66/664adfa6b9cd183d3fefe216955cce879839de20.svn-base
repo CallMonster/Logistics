@@ -1,0 +1,18 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.widget.RelativeLayout;
+
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class FriendsModel  {
+
+    public RelativeLayout navLayout;
+
+    public void findViewByIds(Activity activity){
+        navLayout = (RelativeLayout)activity.findViewById(R.id.invent_friends_nav);
+    }
+}

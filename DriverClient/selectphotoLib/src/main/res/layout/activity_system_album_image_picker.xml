@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/for_dlg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff">
+
+        <RelativeLayout
+            android:id="@+id/relative_layout"
+            style="@style/act_top_bar"
+            android:visibility="visible" >
+            <View
+                style="@style/act_top_bar_bottom_line"/>
+            <TextView
+                android:id="@+id/system_album_image_picker_nav_title_txt"
+                style="@style/act_top_bar_title_text"
+                android:text="@string/system_album_image_picker_nav_title" />
+
+            <ImageView
+                android:id="@+id/system_album_image_picker_nav_back_img"
+                style="@style/act_top_bar_navigation_icon_back" />
+
+            <TextView
+                android:id="@+id/system_album_image_picker_nav_otheralbum_txt"
+                android:text="@string/system_album_image_picker_nav_otheralbum"
+                style="@style/act_top_bar_navigation_text"/>
+
+
+            <RelativeLayout
+                android:id="@+id/system_album_image_picker_nav_rel_back"
+                android:layout_width="65dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"/>
+            <RelativeLayout
+                android:id="@+id/system_album_image_picker_nav_rel_other"
+                android:layout_width="65dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+        <GridView
+            android:id="@+id/system_album_image_picker_GridView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relative_layout"
+            android:layout_weight="5"
+            android:cacheColorHint="#00000000"
+            android:columnWidth="100dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="5dp" >
+        </GridView>
+        <ListView
+            android:id="@+id/system_album_image_picker_listview"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="0.5dp"
+            android:background="@color/white_alpha95"
+            android:visibility="gone" >
+        </ListView>
+</RelativeLayout>

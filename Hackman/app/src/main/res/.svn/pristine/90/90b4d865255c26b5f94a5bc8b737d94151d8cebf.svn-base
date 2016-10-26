@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/grey_low">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/new_bank_phone_valid_nav"/>
+        <TextView android:id="@+id/new_validPhoneFlagText"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="等待发送验证码中"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textColor="@color/colorGrey"/>
+        <RelativeLayout android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorWhite"
+            android:layout_height="@dimen/space_44">
+            <ImageView android:id="@+id/label45"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/list_mobile"/>
+            <EditText android:id="@+id/new_bank_phoneNumberEdit"
+                android:layout_width="@dimen/space_200"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:layout_toRightOf="@id/label45"
+                android:hint="输入新的手机号"
+                android:layout_marginLeft="@dimen/space_5"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/colorGrey"/>
+
+            <TextView android:id="@+id/new_getNumberBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="获取验证码"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/tab_seleted"
+                />
+
+        </RelativeLayout>
+        <RelativeLayout android:layout_marginTop="1dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorWhite"
+            android:layout_height="@dimen/space_44">
+            <EditText android:id="@+id/new_phone_codeEdit"
+                android:layout_width="@dimen/space_200"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="输入短信验证码"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/colorGrey"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView android:id="@+id/new_validPhoneNextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="修改"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:background="@color/tab_seleted"
+        android:textSize="@dimen/font_14"/>
+
+</LinearLayout>

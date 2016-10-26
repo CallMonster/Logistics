@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:background="@drawable/view_selector">
+    <ImageView android:id="@+id/adapter_message_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@mipmap/ic_message_list"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_toRightOf="@id/adapter_message_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/space_10">
+        <TextView android:id="@+id/adapter_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="车险到期提醒"
+            android:textColor="@color/grey_normal"
+            android:textSize="@dimen/font_12" />
+        <TextView android:id="@+id/adapter_message_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2012年05月09日 18:00:00"
+            android:textColor="@color/colorGrey"
+            android:textSize="@dimen/font_12"
+            android:layout_alignParentRight="true"/>
+        <TextView android:id="@+id/adapter_message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您的车险还有15日到期，如需续费请联系客服人员..."
+            android:textColor="@color/colorGrey"
+            android:textSize="@dimen/font_12"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/home_grey"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

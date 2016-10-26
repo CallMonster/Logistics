@@ -1,0 +1,40 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class SetpwdModel {
+    public TextView setpwdBtn,showBtn,rightBtn;
+    public ImageView leftImage;
+    public EditText pwdText,repwdText;
+
+    public void findViewByIds(Activity activity, View.OnClickListener listener){
+        setpwdBtn = (TextView)activity. findViewById(R.id.setpwd_btn);
+        showBtn = (TextView)activity.findViewById(R.id.setpwd_show_btn);
+        pwdText = (EditText) activity.findViewById(R.id.setpwd_new_text);
+        repwdText = (EditText)activity.findViewById(R.id.setpwd_repeat_text);
+        rightBtn = (TextView)activity.findViewById(R.id.right_btn);
+        leftImage = (ImageView)activity.findViewById(R.id.left_img);
+
+        setpwdBtn.setOnClickListener(listener);
+        showBtn.setOnClickListener(listener);
+        leftImage.setOnClickListener(listener);
+    }
+
+    public void clear(){
+        setpwdBtn =null;
+        showBtn = null;
+        pwdText = null;
+        repwdText = null;
+        rightBtn = null;
+        leftImage = null;
+    }
+}

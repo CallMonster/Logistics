@@ -1,0 +1,64 @@
+package com.zt.hackman.model;
+
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.zt.hackman.R;
+import com.zt.hackman.listener.MyListener;
+
+/**
+ * Created by Administrator on 2016/9/14.
+ */
+public class MyModel implements View.OnClickListener {
+    public RelativeLayout myOrderLayout,myFriendsLayout,
+            myAboutLayout,myContractLayout,myIdeaLayout,mySettingLayout,myWalletLayout;
+    private MyListener listener;
+
+    public void findViewByIds(View view){
+        myOrderLayout = (RelativeLayout)view.findViewById(R.id.my_order_relative);
+        myFriendsLayout = (RelativeLayout)view.findViewById(R.id.my_friends_relative);
+        myAboutLayout = (RelativeLayout)view.findViewById(R.id.my_about_relative);
+        myContractLayout = (RelativeLayout)view.findViewById(R.id.my_contract_relatvie);
+        myIdeaLayout = (RelativeLayout)view.findViewById(R.id.my_idea_relative);
+        mySettingLayout = (RelativeLayout)view.findViewById(R.id.my_setting_relative);
+        myWalletLayout = (RelativeLayout)view.findViewById(R.id.my_wallet_relative);
+    }
+
+    public void setListener(MyListener myListener){
+        this.listener = myListener;
+        myOrderLayout.setOnClickListener(this);
+        myFriendsLayout.setOnClickListener(this);
+        myAboutLayout.setOnClickListener(this);
+        myContractLayout.setOnClickListener(this);
+        myIdeaLayout.setOnClickListener(this);
+        mySettingLayout.setOnClickListener(this);
+        myWalletLayout.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.my_order_relative:
+                listener.orderClick();
+                break;
+            case R.id.my_contract_relatvie:
+                listener.contractClick();
+                break;
+            case R.id.my_about_relative:
+                listener.contractClick();
+                break;
+            case R.id.my_idea_relative:
+                listener.ideaClick();
+                break;
+            case R.id.my_setting_relative:
+                listener.settingClick();
+                break;
+            case R.id.my_friends_relative:
+                listener.friendsClick();
+                break;
+            case R.id.my_wallet_relative:
+                listener.walletClick();
+                break;
+        }
+    }
+}

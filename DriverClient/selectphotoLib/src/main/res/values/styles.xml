@@ -1,0 +1,42 @@
+<resources>
+
+    <!-- 顶部导航条 -->
+    <style name="act_top_bar">
+        <item name="android:background">@color/main_theme_bg_white</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:layout_width">fill_parent</item>
+    </style>
+    <style name="act_top_bar_bottom_line">
+        <item name="android:background">@color/activity_top_bar_line</item>
+        <item name="android:layout_height">0.4dp</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+    <style name="act_top_bar_title_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/txt_black_1</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="act_top_bar_navigation_icon_back">
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:scaleType">centerCrop</item>
+        <item name="android:src">@drawable/main_back</item>
+    </style>
+    <style name="act_top_bar_navigation_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:textColor">@color/txt_black_1</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+</resources>

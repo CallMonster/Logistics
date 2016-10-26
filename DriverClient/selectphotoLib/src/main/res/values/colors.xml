@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sc_loading_bg_color">#dcdddd</color>
+    <color name="main_theme_bg_white">#ffffff</color>
+    <color name="activity_top_bar_line">#a3a3a3</color>
+    <color name="txt_black_1">#bf161616</color>
+    <color name="white_alpha95">#f0ffffff</color>
+
+
+</resources>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/approve_state_nav_layout"/>
+
+        <com.zt.hackman.base.widget.ProgressActivity
+            android:id="@+id/approve_state_progressActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:emptyBackgroundColor="@color/grey_low"
+            app:errorBackgroundColor="@color/grey_low"
+            app:loadingBackgroundColor="@color/grey_low"
+            app:emptyImageHeight="52dp"
+            app:emptyImageWidth="54dp"
+            app:loadingProgressBarHeight="48dp"
+            app:loadingProgressBarWidth="48dp"
+            app:errorImageHeight="52dp"
+            app:errorImageWidth="54dp"
+            android:layout_below="@id/approve_state_nav_layout">
+
+        <LinearLayout android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="18dp"
+            android:layout_marginTop="@dimen/space_15"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/label33"
+            android:gravity="center_horizontal">
+            <CheckBox android:button="@drawable/check_selector"
+                android:background="@null"
+                android:text="@null"
+                android:id="@+id/state_one_checkbox"
+                android:layout_width="18dp"
+                android:layout_height="18dp" />
+            <View android:id="@+id/line_one_view"
+                android:layout_width="2dp"
+                android:layout_height="72dp"
+                android:background="@color/tab_seleted"/>
+
+            <CheckBox android:button="@drawable/check_selector"
+                android:background="@null"
+                android:text="@null"
+                android:id="@+id/state_two_checkbox"
+                android:layout_width="18dp"
+                android:layout_height="18dp" />
+            <View android:id="@+id/line_two_view"
+                android:layout_width="2dp"
+                android:layout_height="72dp"
+                android:background="@color/tab_seleted"/>
+
+            <CheckBox android:button="@drawable/check_selector"
+                android:background="@null"
+                android:text="@null"
+                android:id="@+id/state_three_checkbox"
+                android:layout_width="18dp"
+                android:layout_height="18dp" />
+        </LinearLayout>
+
+        <!-- 右侧-->
+        <LinearLayout android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="match_parent"
+            android:layout_below="@id/approve_state_nav_layout"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/label33"
+            android:layout_marginTop="@dimen/space_15"
+            android:orientation="vertical">
+            <TextView android:id="@+id/state_one_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="提交个人实名信息"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"/>
+            <TextView android:id="@+id/state_one_content_text"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:textColor="@color/home_grey"
+                android:text="第一步提交车辆及个人信息"
+                android:textSize="@dimen/font_12"/>
+            <TextView android:id="@+id/state_two_title_text"
+                android:layout_marginTop="42dp"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:text="资料审核中"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"/>
+            <TextView android:id="@+id/state_two_content_text"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:textColor="@color/home_grey"
+                android:text="正通审核资料是否符合司机标准"
+                android:textSize="@dimen/font_12"/>
+            <TextView android:id="@+id/state_three_title_text"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="42dp"
+                android:layout_height="24dp"
+                android:text="认证结果"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"/>
+            <TextView android:id="@+id/state_three_content_text"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:textColor="@color/home_grey"
+                android:text="认证成功"
+                android:textSize="@dimen/font_12"/>
+
+        </LinearLayout>
+        </com.zt.hackman.base.widget.ProgressActivity>
+    </RelativeLayout>
+</LinearLayout>

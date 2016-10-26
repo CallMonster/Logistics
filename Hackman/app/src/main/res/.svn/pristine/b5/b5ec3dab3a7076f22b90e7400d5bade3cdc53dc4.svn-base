@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/grey_low">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/add_bank_two_nav"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_44"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:text="请选择银行卡类型"
+            android:textColor="@color/home_grey"
+            android:gravity="center_vertical"/>
+
+
+        <RelativeLayout android:layout_marginTop="@dimen/space_1"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/colorWhite"
+            android:id="@+id/card_type_selector_layout">
+            <ImageView android:id="@+id/label18"
+                android:layout_width="wrap_content"
+                android:src="@mipmap/list_withdraw"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_height="wrap_content"
+
+                />
+            <TextView android:id="@+id/card_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="@color/grey_normal"
+                android:text="招商银行 储蓄卡"
+                android:layout_toRightOf="@id/label18"
+                android:layout_marginLeft="@dimen/space_8"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/derection_icon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:id="@+id/add_bank_phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/colorWhite"
+            >
+            <ImageView android:id="@+id/label19"
+                android:layout_width="wrap_content"
+                android:src="@mipmap/list_mobile"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_height="wrap_content"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/derection_icon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText android:layout_toRightOf="@id/label19"
+                android:textColor="@color/colorGrey"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginLeft="@dimen/space_8"
+                android:hint="请输入银行预留手机号"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_12"
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:id="@+id/card_phone_no"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+            <CheckBox android:textColor="@color/colorGrey"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="同意"
+                android:background="@null"
+                android:button="@drawable/check_selector"
+                android:id="@+id/bank_card_check"
+                android:padding="@dimen/space_8"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户协议"
+                android:layout_toRightOf="@id/bank_card_check"
+                android:layout_centerVertical="true"
+                android:textColor="@color/tab_seleted"
+                android:layout_marginLeft="@dimen/space_5"/>
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/tab_seleted"
+        android:textColor="@color/colorWhite"
+        android:text="下一步"
+        android:gravity="center"
+        android:textSize="@dimen/font_14"
+        android:id="@+id/add_bank_next_two_btn"/>
+
+</LinearLayout>

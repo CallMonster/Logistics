@@ -1,0 +1,35 @@
+package com.zt.hackman.model;
+
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+
+/**
+ * Created by Administrator on 2016/9/30.
+ */
+public class NewPhoneValidModel implements View.OnClickListener{
+    public RelativeLayout navLayout;
+    public TextView updateBtn;
+    private BaseActivity ac ;
+
+    public void findViewByIds(BaseActivity ac){
+        this.ac = ac;
+        navLayout = (RelativeLayout)ac.findViewById(R.id.new_bank_phone_valid_nav);
+        updateBtn = (TextView)ac.findViewById(R.id.new_validPhoneNextBtn);
+
+        navLayout.setBackgroundResource(R.color.colorWhite);
+        updateBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.new_validPhoneNextBtn:
+                ac.finish();
+                break;
+        }
+    }
+}

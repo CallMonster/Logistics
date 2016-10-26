@@ -1,0 +1,234 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.MainActivity;
+import com.zt.hackman.activity.SetpwdActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.StringUtils;
+import com.zt.hackman.utils.ToastUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class ForgetModel implements View.OnClickListener{
+    public TextView forgetBtn,getNumBtn,rightBtn;
+    public ImageView leftImage;
+    public EditText phoneText,numText;
+    private HackRequest request = new HackRequest();
+    private boolean isstop= false;
+    private int currentNum = 60;
+
+    private Activity ac;
+
+    private Handler mHandler = new Handler() {
+        /*
+         * edit by yuanjingchao 2014-08-04 19:10
+         */
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    // 添加更新ui的代码
+                    if (!isstop) {
+                        if(currentNum==0){
+                            getNumBtn.setClickable(true);
+                            getNumBtn.setText("重新发送验证码");
+                        }else{
+                            getNumBtn.setText("发送验证码("+currentNum+")");
+                            currentNum--;
+                            mHandler.sendEmptyMessageDelayed(1, 1000);
+                        }
+                    }
+                    break;
+                case 2:
+                    break;
+            }
+        }
+
+    };
+
+    public void findViewByIds(Activity activity){
+        this.ac = activity;
+        forgetBtn = (TextView) activity.findViewById(R.id.forget_btn);
+        getNumBtn = (TextView)activity.findViewById(R.id.getNumBtn);
+        numText = (EditText) activity.findViewById(R.id.forget_num_text);
+        phoneText = (EditText)activity.findViewById(R.id.forget_id_text);
+        rightBtn = (TextView)activity.findViewById(R.id.right_btn);
+        leftImage = (ImageView)activity.findViewById(R.id.left_img);
+
+        forgetBtn.setOnClickListener(this);
+        getNumBtn.setOnClickListener(this);
+        leftImage.setOnClickListener(this);
+    }
+
+    public void clear(){
+        forgetBtn = null;
+        getNumBtn = null;
+        numText = null;
+        phoneText = null;
+        rightBtn = null;
+        leftImage = null;
+        request = null;
+        sendcallback = null;
+        ac = null;
+        validCallBack= null;
+    }
+
+    /**
+     * 清除登录按钮的动画
+     */
+    private void clearAnim(){
+        forgetBtn.clearAnimation();
+        forgetBtn.setBackgroundResource(R.mipmap.login_btn);
+    }
+
+    StringCallback validCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            clearAnim();
+            Toast.makeText(ac,"网络请求异常",Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResponse(String response) {
+            clearAnim();
+            Response res = new Response(response,ac);
+            if(res.code>0){
+                Bundle bundle = new Bundle();
+                bundle.putString(Constant.INTNENTS.INTENT_PHONE_NUM,phoneText.getText().toString());
+                Intent intent = new Intent(ac,SetpwdActivity.class);
+                intent.putExtras(bundle);
+                ac.startActivity(intent);
+            }else{
+                Toast.makeText(ac,"网络请求异常",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    /**
+     * 判断验证码是否正确
+     */
+    private void validIsOk(){
+
+        String tel = phoneText.getText().toString();
+        String verCode = numText.getText().toString();
+        if(tel==null||StringUtils.isEmpty(tel)){
+            Toast.makeText(ac,"手机号码不能为空",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+        if(verCode==null||StringUtils.isEmpty(verCode)){
+            Toast.makeText(ac,"请输入验证码",Toast.LENGTH_SHORT).show();
+            return ;
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","checkVerifyCodeNoSs");
+            jsonObject.put("tel",tel);
+            jsonObject.put("verCode",verCode);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(ac,"数据转换异常",Toast.LENGTH_SHORT).show();
+        }
+        new HackRequest().request(jsonObject.toString(),validCallBack,Constant.TEST_HOST);
+    }
+
+    /**
+     * 发送验证码响应对象
+     * @param v
+     */
+    public StringCallback sendcallback = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+
+            getNumBtn.setClickable(true);
+            mHandler.removeMessages(1);
+            currentNum = 60;
+            isstop = true;
+            getNumBtn.setText("发送验证码");
+            Toast.makeText(ac, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Response res = new Response(response,ac);
+            mHandler.removeMessages(1);
+            clearAnim();
+            if(res.code==1) {
+                ToastUtils.showSuccess(ac, "发送验证码成功");
+                //清除model里的数据
+                ac.finish();
+            }else{
+                currentNum = 60;
+                isstop = true;
+                getNumBtn.setText("发送验证码");
+                getNumBtn.setClickable(true);
+                Toast.makeText(ac,res.msg,Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+    /**13821576236
+     * 发送验证码
+     * @throws JSONException
+     */
+    private void sendValid() throws JSONException {
+        if(phoneText.getText()==null|| StringUtils.isEmpty(phoneText.getText().toString())){
+            Toast.makeText(ac, "请输入您的手机号码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        getNumBtn.setClickable(false);
+        isstop= false;
+        mHandler.sendEmptyMessage(1);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("command","sendMessageForResetPWD");
+        jsonObject.put("tel",phoneText.getText().toString());
+        request.request(jsonObject.toString(),sendcallback, Constant.TEST_HOST);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.getNumBtn:
+                try {
+                    sendValid();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            case R.id.forget_btn:
+                forgetBtn.setBackgroundResource(R.mipmap.logining);
+                forgetBtn.startAnimation(AnimationUtils.loadAnimation(ac,R.anim.rotate_anim));
+                validIsOk();
+                break;
+            case R.id.left_img:
+                ac.finish();
+                break;
+        }
+    }
+}

@@ -1,0 +1,80 @@
+package com.zt.hackman.activity;
+
+import android.os.Bundle;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+import com.zt.hackman.model.MessageCenterModel;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.response.MessageResponse;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class MessageCenterAcitivty extends BaseActivity implements LeftListener,RightListener{
+    NavModel navModel;
+    MessageCenterModel model;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_message_center);
+        initNavBar();
+        findViewByIds();
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(this);
+        navModel.setLeftListener(this);
+        navModel.setRightListener(this);
+        navModel.setLeftBtn(R.mipmap.main_back);
+        navModel.setTitle("消息中心");
+        navModel.setRightBtn("标记已读");
+    }
+
+    @Override
+    protected void findViewByIds() {
+        model = new MessageCenterModel();
+        model.findViewByIds(this);
+    }
+
+    @Override
+    protected void initView() {
+        List<MessageResponse> messages = new ArrayList<MessageResponse>();
+        MessageResponse m = new MessageResponse();
+        MessageResponse m1 = new MessageResponse();
+        MessageResponse m2 = new MessageResponse();
+        MessageResponse m3 = new MessageResponse();
+        MessageResponse m4= new MessageResponse();
+        messages.add(m);
+        messages.add(m1);
+        messages.add(m2);
+        messages.add(m3);
+        messages.add(m4);
+
+        model.init(this,messages);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void leftClick() {
+        finish();
+    }
+
+    @Override
+    public void rightClick() {
+
+    }
+}

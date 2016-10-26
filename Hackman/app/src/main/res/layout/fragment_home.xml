@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/nav_layout"
+        android:id="@+id/fragment_home_nav"/>
+    <com.zt.hackman.base.widget.ProgressActivity
+        android:id="@+id/fragment_home_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:emptyBackgroundColor="@color/grey_low"
+        app:errorBackgroundColor="@color/grey_low"
+        app:loadingBackgroundColor="@color/grey_low"
+        app:emptyImageHeight="52dp"
+        app:emptyImageWidth="54dp"
+        app:loadingProgressBarHeight="52dp"
+        app:loadingProgressBarWidth="52dp"
+        app:errorImageHeight="52dp"
+        app:errorImageWidth="54dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_low">
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:id="@+id/home_banner"
+                app:canLoop="true"
+                android:background="@color/colorWhite"/>
+            <GridView android:layout_height="wrap_content"
+                android:id="@+id/recommendGridView"
+                android:layout_width="match_parent"
+                android:horizontalSpacing="@dimen/space_2"
+                android:numColumns="2"
+                android:layout_marginTop="@dimen/space_1"
+                android:background="@color/grey_low"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_1"
+                android:background="@color/colorGrey"/>
+            <LinearLayout android:id="@+id/recommendListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/adapter_recommend"
+                android:paddingTop="@dimen/space_8"
+                android:background="@color/colorWhite"
+                android:paddingBottom="@dimen/space_8"
+                android:orientation="vertical">
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_3"
+                    android:id="@+id/recommend_msg_one_layout">
+                    <ImageView android:id="@+id/adapter_recommend_flag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/red_point"
+                        android:layout_marginLeft="13dp"
+                        android:layout_centerVertical="true"/>
+                    <TextView android:id="@+id/adapter_recommend_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/adapter_recommend_flag"
+                        android:textSize="@dimen/font_12"
+                        android:textColor="@color/movement_color"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="13dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/space_3"
+                    android:id="@+id/recommend_msg_two_layout">
+                    <ImageView android:id="@+id/adapter_recommend_flag_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/blue_point"
+                        android:layout_marginLeft="13dp"
+                        android:layout_centerVertical="true"/>
+                    <TextView android:id="@+id/adapter_recommend_info_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/adapter_recommend_flag_second"
+                        android:textSize="@dimen/font_12"
+                        android:textColor="@color/movement_color"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="13dp"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+
+            <RelativeLayout android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="@dimen/space_8">
+            <TextView android:text="最新资讯"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:textColor="@color/home_grey"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_12"
+                />
+                <TextView android:textSize="@dimen/font_14"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="@color/tab_seleted"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:id="@+id/more_news_btn"/>
+            </RelativeLayout>
+            <ListView android:scrollbarStyle="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:id="@+id/newsListView"
+                android:background="@color/colorWhite"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+    </com.zt.hackman.base.widget.ProgressActivity>
+
+</LinearLayout>

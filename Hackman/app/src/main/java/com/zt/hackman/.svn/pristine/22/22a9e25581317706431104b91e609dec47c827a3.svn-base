@@ -1,0 +1,193 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Html;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.amap.api.maps2d.MapView;
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.HappenQuestionClaimActivity;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.base.widget.ProgressActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.OrderResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.GsonUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class OrderDetailClaimModel implements View.OnClickListener{
+    public RelativeLayout orderDetailNav;
+    public TextView happenQuestionBtn,completeBtn,arriveTimeText,startAddressText
+            ,endAddressText,startPersonPhoneText,endPersonPhoneText,startPersonName,endPersonName
+            ,requireText,orderIdText,goodNumText,createTimeText;
+
+    public MapView mapView;
+    private ProgressActivity order_detail_claim_progressActivity;
+    private BaseActivity ac;
+    private String orderId;
+    private OrderResponse orderResponse = null;
+
+    public void findViewByIds(BaseActivity activity,String orderId){
+        this.orderId = orderId;
+        this.ac = activity;
+        orderDetailNav = (RelativeLayout)activity.findViewById(R.id.order_detail_claim_title);
+        happenQuestionBtn = (TextView)activity.findViewById(R.id.claim_happen_question_btn);
+        completeBtn = (TextView)activity.findViewById(R.id.claim_confirm_complete_btn);
+        orderDetailNav.setBackgroundResource(R.color.colorWhite);
+        mapView  = (MapView)activity. findViewById(R.id.orderDetailClaimMap);
+
+        arriveTimeText = (TextView)activity.findViewById(R.id.order_detail_claim_arrive_time);
+        startAddressText = (TextView)activity.findViewById(R.id.detail_claim_start_address_text);
+        endAddressText = (TextView)activity.findViewById(R.id.detail_claim_end_address_text);
+        startPersonPhoneText = (TextView)activity.findViewById(R.id.detail_claim_start_person_phone_text);
+        endPersonPhoneText = (TextView)activity.findViewById(R.id.detail_claim_end_person_phone_text);
+        startPersonName = (TextView)activity.findViewById(R.id.detail_claim_start_person_name);
+        endPersonName = (TextView)activity.findViewById(R.id.detail_claim_end_person_name);
+        requireText = (TextView)activity.findViewById(R.id.detail_claim_require_text);
+        orderIdText = (TextView)activity.findViewById(R.id.detail_claim_order_id_text);
+        goodNumText = (TextView)activity.findViewById(R.id.detail_claim_goods_num_text);
+        createTimeText = (TextView)activity.findViewById(R.id.detail_claim_start_time_text);
+
+        order_detail_claim_progressActivity = (ProgressActivity)
+                activity.findViewById(R.id.order_detail_claim_progressActivity);
+
+        completeBtn.setOnClickListener(this);
+        happenQuestionBtn.setOnClickListener(this);
+    }
+
+    /**
+     * 取货遇到问题回调
+     */
+    StringCallback detailCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            order_detail_claim_progressActivity.showError("网络请求错误",
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    order_detail_claim_progressActivity.showLoading();
+                    orderDetail();
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(String response) {
+
+            Response res = new Response(response,ac);
+            if(res.code>0){
+                String content = null;
+
+                try {
+                    JSONObject jsonObject = new JSONObject(res.data);
+                    content = jsonObject.getString("orderdetail");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ac,"JSON数据转换异常",Toast.LENGTH_SHORT).show();
+                }
+                List<OrderResponse> orderResponses = (List<OrderResponse>) GsonUtils.jsonToList(
+                        content,new TypeToken<List<OrderResponse>>(){}.getType());
+                if(orderResponses==null||orderResponses.size()<=0){
+                    order_detail_claim_progressActivity.showEmpty(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            order_detail_claim_progressActivity.showLoading();
+                            orderDetail();
+                        }
+                    });
+                }else {
+                    orderResponse = orderResponses.get(0);
+                    if (orderResponse == null) {
+                        order_detail_claim_progressActivity.showEmpty(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                order_detail_claim_progressActivity.showLoading();
+                                orderDetail();
+                            }
+                        });
+                    } else {
+                        startAddressText.setText(orderResponse.deliverAddr);
+                        endAddressText.setText(orderResponse.receiptAddr);
+                        startPersonName.setText(orderResponse.deliver);
+                        endPersonName.setText(orderResponse.receipt);
+                        startPersonPhoneText.setText(orderResponse.deliverTel);
+                        endPersonPhoneText.setText(orderResponse.receiptTel);
+                        arriveTimeText.setText(orderResponse.leadTime);
+                        createTimeText.setText("出发时间："+orderResponse.createTime);
+                        requireText.setText("额外需求："+orderResponse.addRequir);
+                        orderIdText.setText("订单编号："+orderResponse.id);
+                        goodNumText.setText("商品数量："+orderResponse.goodsNum);
+                        order_detail_claim_progressActivity.showContent();
+
+                    }
+                }
+            }else{
+                order_detail_claim_progressActivity.showError(res.msg, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        order_detail_claim_progressActivity.showLoading();
+                        orderDetail();
+                    }
+                });
+            }
+        }
+    };
+
+    /**
+     * 请求网络详情
+     */
+    private void orderDetail(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","orderDetail");
+            jsonObject.put("sid","e0899ukp6b6fcbk4njncdr8vj2");
+            jsonObject.put("status","0");
+            jsonObject.put("orderId","1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new HackRequest().request(jsonObject.toString(),detailCallBack, Constant.TEST_HOST);
+
+    }
+
+    /**
+     * 初始化视图
+     */
+    public  void initView(){
+        order_detail_claim_progressActivity.showLoading();
+        orderDetail();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.claim_happen_question_btn:
+                Bundle bundle = new Bundle();
+                bundle.putString(Constant.INTNENTS.INTENT_ORDER_ID,orderResponse.id);
+                bundle.putString("start_addr",orderResponse.deliverAddr);
+                bundle.putString("end_addr",orderResponse.receiptAddr);
+                ac.startActivity(HappenQuestionClaimActivity.class,bundle);
+                break;
+            case R.id.claim_confirm_complete_btn:
+                break;
+        }
+    }
+
+}

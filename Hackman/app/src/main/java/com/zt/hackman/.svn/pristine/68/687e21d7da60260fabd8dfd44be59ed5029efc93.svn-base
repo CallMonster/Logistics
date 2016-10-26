@@ -1,0 +1,202 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.reflect.TypeToken;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.ActionDetailsActivity;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.base.BaseApp;
+import com.zt.hackman.base.widget.ProgressActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.GsonUtils;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/26.
+ */
+public class NewsListModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener{
+    public ExpendRecycleView recycleView;
+    public SwipeRefreshLoadMore loadMore;
+    public RelativeLayout navLayout;
+    private BaseActivity activity;
+    public ProgressActivity progressActivity;
+    private int current = 1;
+    private AbsRVAdapter<HomeResponse.LatestInfo> adapter;
+    List<HomeResponse.LatestInfo> latestInfos;
+
+    StringCallback listCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            progressActivity.showError("网络请求异常", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    progressActivity.showLoading();
+                    initData();
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Response res = new Response(response,activity);
+
+            if (res.code > 0) {
+                /**
+                 * 1.如果数据datas为空则显示空界面
+                 * 2.正常显示界面的情况，如果adapter等于null，则新建adapter，若adapter不为空则刷新adapter
+                 */
+                try {
+
+                    JSONObject array = new JSONObject(res.data);
+                    String content = array.getString("latestInfo");
+                    latestInfos = (List<HomeResponse.LatestInfo>)
+                            GsonUtils.jsonToList(content,
+                                    new TypeToken<List<HomeResponse.LatestInfo>>(){}.getType());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(activity,"JSON格式转换异常",Toast.LENGTH_SHORT).show();
+                }
+                if(latestInfos==null||latestInfos.size()<=0){
+                    progressActivity.showEmpty(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            progressActivity.showLoading();
+                            initData();
+                        }
+                    });
+                }else {
+                    if (adapter == null) {
+                        initAadapter(latestInfos);
+                        adapter.setOnItemClickListener(new AbsRVAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+                                Intent intent = new Intent(NewsListModel.this.activity, ActionDetailsActivity.class);
+                                Bundle bundle = new Bundle();
+                                bundle.putString(Constant.INTNENTS.INTENT_ACTION_ID,latestInfos.get(position).id);
+                                intent.putExtras(bundle);
+                                NewsListModel.this.activity.startActivity(intent);
+                            }
+                        });
+                        recycleView.setAdapter(adapter);
+                        loadMore.setOnRefreshListener(NewsListModel.this);
+                        loadMore.setOnLoadListener(NewsListModel.this);
+                        NewsListModel.this.onRefresh();
+                    } else {
+                        adapter.refreshData(latestInfos);
+                    }
+                    progressActivity.showContent();
+                }
+
+            }else{
+                progressActivity.showError(res.msg,new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        progressActivity.showLoading();
+                        initData();
+                    }
+                });
+            }
+        }
+    };
+
+    /**
+     * 初始化adapter对象
+     * @param datas
+     */
+    private void initAadapter(List<HomeResponse.LatestInfo> datas){
+        adapter= new AbsRVAdapter<HomeResponse.LatestInfo>
+                (recycleView, datas, R.layout.adapter_news) {
+            @Override
+            public void showData(ViewHolder vHolder, HomeResponse.LatestInfo data, int position) {
+
+                ImageView imageView = (ImageView) vHolder.getView(R.id.adapter_latest_img);
+                TextView titleView = (TextView) vHolder.getView(R.id.adapter_latest_title);
+                TextView contentView = (TextView) vHolder.getView(R.id.adapter_latest_content);
+                ImageLoader.getInstance().displayImage(data.smallImg,imageView, BaseApp.options);
+                titleView.setText(data.title);
+                contentView.setText(data.content);
+            }
+
+        };
+    }
+
+    public void findViewByIds(BaseActivity activity){
+        this.activity =activity;
+        recycleView = (ExpendRecycleView)activity.findViewById(R.id.order_list_view);
+        loadMore = (SwipeRefreshLoadMore)activity.findViewById(R.id.order_swipe_more);
+        navLayout = (RelativeLayout)activity.findViewById(R.id.news_list_nav);
+        progressActivity = (ProgressActivity)activity.findViewById(R.id.news_list_progressActivity);
+
+        navLayout.setBackgroundResource(R.color.colorWhite);
+    }
+
+    public void init(Activity activity){
+
+        progressActivity.showLoading();
+        loadMore.setColorSchemeColors(new int[]{R.color.tab_seleted});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recycleView.setLayoutManager(linearLayoutManager);
+
+        initData();
+
+
+    }
+
+    private void initData(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","getInformation");
+            jsonObject.put("page",""+current);
+            jsonObject.put("limit",Constant.home_pageSize);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        new HackRequest().request(jsonObject.toString(),listCallBack,Constant.TEST_HOST);
+
+    }
+
+    @Override
+    public void onLoadMore() {
+        current++;
+        initData();
+    }
+
+    @Override
+    public void onRefresh() {
+        current=1;
+        initData();
+    }
+
+    public void clear(){
+        loadMore=null;
+        latestInfos = null;
+        recycleView =null;
+        adapter = null;
+        navLayout = null;
+        progressActivity =null;
+    }
+}

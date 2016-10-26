@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentPanel"
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    android:background="@color/background_white">
+
+    <ImageView
+        android:id="@+id/news_img"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/loading" />
+
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/news_img"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/news_img"
+        android:text="这是一个title"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/news_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/news_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/news_img"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="这是一个content这是一个content这是一个content这是一个content这是一个content这是一个content这是一个content这是一个content"
+        android:textColor="@color/text_grey"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_alignParentBottom="true"
+        android:alpha="0.1"
+        android:background="@color/text_grey" />
+</RelativeLayout>

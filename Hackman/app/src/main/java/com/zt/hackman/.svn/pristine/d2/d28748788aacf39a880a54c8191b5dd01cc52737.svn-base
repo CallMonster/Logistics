@@ -1,0 +1,79 @@
+package com.zt.hackman.activity;
+
+import android.os.Bundle;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+import com.zt.hackman.model.MessageCenterModel;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.response.MessageResponse;
+
+import org.simple.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class MessageCenterAcitivty extends BaseActivity implements LeftListener,RightListener{
+    NavModel navModel;
+    MessageCenterModel model;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_message_center);
+        EventBus.getDefault().register(this);
+        initNavBar();
+        findViewByIds();
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(this);
+        navModel.setLeftListener(this);
+        navModel.setRightListener(this);
+        navModel.setLeftBtn(R.mipmap.main_back);
+        navModel.setTitle("消息中心");
+        navModel.setRightBtn("标记已读");
+    }
+
+    @Override
+    protected void findViewByIds() {
+        model = new MessageCenterModel();
+        model.findViewByIds(this);
+    }
+
+    @Override
+    protected void initView() {
+
+        model.init(this);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void leftClick() {
+        finish();
+    }
+
+    @Override
+    public void rightClick() {
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        model = null;
+        super.onDestroy();
+    }
+}

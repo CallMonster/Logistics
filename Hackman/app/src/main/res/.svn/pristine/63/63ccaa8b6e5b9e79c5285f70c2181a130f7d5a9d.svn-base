@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/action_detials_nav"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite">
+            <LinearLayout android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/colorWhite">
+                <TextView android:text="京东大甩卖"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:id="@+id/action_details_title"/>
+
+                <TextView android:text="活动时间:2000190909"
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/home_grey"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:inputType="textMultiLine"
+                    android:id="@+id/action_details_time"
+                    android:layout_marginTop="@dimen/space_10"/>
+
+                <ImageView android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/default_image"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:id="@+id/action_details_img"/>
+
+                <TextView android:id="@+id/action_details_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:layout_marginTop="@dimen/space_10"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    android:text="   就立刻高看到手机费卢卡斯的空间了开发大撒即可连接法兰卡电视机房里看到手机卡疯"
+                    android:textColor="@color/home_grey"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+
+</LinearLayout>

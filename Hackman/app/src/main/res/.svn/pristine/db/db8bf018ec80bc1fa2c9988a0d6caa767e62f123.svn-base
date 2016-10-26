@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/grey_low">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/invent_friends_nav"/>
+    <RelativeLayout android:id="@+id/searchBoxLayout"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="@drawable/grey_frame_round_conner_white"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/searchbox_search"
+            android:layout_centerInParent="true"
+            android:text="搜索好友"
+            android:drawablePadding="@dimen/space_5"
+            android:textColor="@color/home_grey"/>
+
+    </RelativeLayout>
+
+    <ListView android:id="@+id/friends_list_view"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:dividerHeight="@dimen/space_1"
+        android:divider="@color/home_grey"/>
+    </LinearLayout>
+</RelativeLayout>

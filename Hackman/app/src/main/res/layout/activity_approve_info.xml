@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView style="@style/main_text"
+            android:text="真实姓名"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_25"/>
+        <TextView android:layout_width="wrap_content"
+            android:text="张三丰"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginRight="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_10"
+            android:id="@+id/oneUserName"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"/>
+
+
+        <TextView style="@style/main_text"
+            android:text="身份证号码"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_25"/>
+        <TextView android:text="198898998989900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginRight="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_10"
+            android:id="@+id/oneIdenNumber"/>
+
+        <TextView style="@style/main_text"
+            android:text="上传身份证正反面照片"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_25"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_120"
+            android:layout_marginTop="@dimen/space_20"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginRight="@dimen/space_30"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:background="@color/photo_bg"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/space_8"
+                android:layout_centerInParent="true"
+                android:id="@+id/approve_info_front_photo"/>
+
+            <ImageView
+                android:layout_marginLeft="@dimen/space_8"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:background="@color/photo_bg"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:id="@+id/approve_info_reserve_photo"/>
+        </LinearLayout>
+        <TextView style="@style/main_text"
+            android:text="上传驾驶证照片"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_25"/>
+
+
+        <ImageView android:id="@+id/approve_info_driving_licence_photo"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:background="@color/photo_bg"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_15"/>
+
+
+        <TextView style="@style/main_text"
+            android:text="企业编号(选填)"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_15"/>
+        <TextView android:text="302557"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textSize="20sp"
+            android:textColor="@color/colorBlack"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginRight="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_10"
+            android:id="@+id/oneEnNumberText"/>
+        <TextView style="@style/main_text"
+            android:text="上传营业资格证(可选)"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_25"/>
+
+        <ImageView android:id="@+id/approve_info_business_certificate_photo"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:background="@color/photo_bg"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginTop="@dimen/space_15"/>
+    </LinearLayout>
+
+</LinearLayout>

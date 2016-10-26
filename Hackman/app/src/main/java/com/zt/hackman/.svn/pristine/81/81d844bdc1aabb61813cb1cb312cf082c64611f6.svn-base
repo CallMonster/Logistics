@@ -1,0 +1,250 @@
+package com.zt.hackman.utils;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
+import java.util.Set;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Base64;
+
+public class PreferencesUtils {
+	public static String PREFERENCE_NAME = "CY";
+
+	public static boolean putString(Context context, String key, String value) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(key, value);
+		return editor.commit();
+	}
+
+	public static String getString(Context context, String key) {
+		return getString(context, key, null);
+	}
+
+	public static String getString(Context context, String key,
+			String defaultValue) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		return settings.getString(key, defaultValue);
+	}
+
+	public static boolean putInt(Context context, String key, int value) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(key, value);
+		return editor.commit();
+	}
+
+	public static int getInt(Context context, String key) {
+		return getInt(context, key, 0);
+	}
+
+	public static int getInt(Context context, String key, int defaultValue) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		return settings.getInt(key, defaultValue);
+	}
+
+	public static boolean putLong(Context context, String key, long value) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putLong(key, value);
+		return editor.commit();
+	}
+
+	public static long getLong(Context context, String key) {
+		return getLong(context, key, -1);
+	}
+
+	public static long getLong(Context context, String key, long defaultValue) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		return settings.getLong(key, defaultValue);
+	}
+
+	public static boolean putFloat(Context context, String key, float value) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putFloat(key, value);
+		return editor.commit();
+	}
+
+	public static float getFloat(Context context, String key) {
+		return getFloat(context, key, -1);
+	}
+
+	public static float getFloat(Context context, String key, float defaultValue) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		return settings.getFloat(key, defaultValue);
+	}
+
+	public static boolean putBoolean(Context context, String key, boolean value) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putBoolean(key, value);
+		return editor.commit();
+	}
+
+	public static boolean getBoolean(Context context, String key) {
+		return getBoolean(context, key, false);
+	}
+
+	public static boolean getBoolean(Context context, String key,
+			boolean defaultValue) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		return settings.getBoolean(key, defaultValue);
+	}
+
+	/**
+	 * API-11 以上支持此方法
+	 * */
+	@SuppressLint("NewApi")
+	public static boolean putStringSet(Context context, final String key,
+			final Set<String> value) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putStringSet(key, value);
+		return editor.commit();
+	}
+
+	public static Set<String> getStringSet(Context context, String key) {
+		return getStringSet(context, key, null);
+	}
+
+	@SuppressLint("NewApi")
+	public static Set<String> getStringSet(Context context, String key,
+			Set<String> defaultValue) {
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		return settings.getStringSet(key, defaultValue);
+	}
+
+	// 存储、读取复杂对象
+	public static boolean putComplexObject(Context context, final String key,
+			final Object value) {
+		// SharedPreferences settings =
+		// context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+		// SharedPreferences.Editor editor = settings.edit();
+		// editor.putStringSet(key, value);
+		// return editor.commit();
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = null;
+		try {
+			oos = new ObjectOutputStream(baos);
+			// 将Product对象放到OutputStream中
+			oos.writeObject(value);
+
+			// 将Product对象转换成byte数组，并将其进行base64编码
+			// String productBase64 = new
+			// String(Base64.encodeBase64(baos.toByteArray()));
+			String productBase64 = new String(Base64.encode(baos.toByteArray(),
+					Base64.DEFAULT));
+
+			// 将编码后的字符串写到base64.xml文件中
+			editor.putString(key, productBase64);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (oos != null) {
+				try {
+					oos.close();
+					oos = null;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (baos != null) {
+				try {
+					baos.close();
+					baos = null;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return editor.commit();
+	}
+
+	public static Object getComplexObject(Context context, String key) {
+		return getComplexObject(context, key, null);
+	}
+
+	public static Object getComplexObject(Context context, String key,
+			String defaultValue) {
+
+		ObjectInputStream ois = null;
+		Object obj = null;
+		ByteArrayInputStream bais = null;
+
+		SharedPreferences settings = context.getSharedPreferences(
+				PREFERENCE_NAME, Context.MODE_PRIVATE);
+		String productBase64 = settings.getString(key, defaultValue);
+		if (productBase64 == null || productBase64.length() <= 0) {
+			return null;
+		}
+		try {
+			// 对Base64格式的字符串进行解码
+			byte[] base64Bytes = Base64.decode(productBase64.getBytes(),
+					Base64.DEFAULT);
+			bais = new ByteArrayInputStream(base64Bytes);
+			ois = new ObjectInputStream(bais);
+			// 从ObjectInputStream中读取Product对象
+			obj = ois.readObject();
+		} catch (StreamCorruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (ois != null) {
+				try {
+					ois.close();
+					ois = null;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+			if (bais != null) {
+				try {
+					bais.close();
+					bais = null;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return obj;
+	}
+
+}

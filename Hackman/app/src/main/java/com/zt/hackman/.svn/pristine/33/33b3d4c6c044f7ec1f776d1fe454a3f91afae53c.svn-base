@@ -1,0 +1,41 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class ForgetModel {
+    public TextView forgetBtn,getNumBtn,rightBtn;
+    public ImageView leftImage;
+    public EditText phoneText,numText;
+
+    public void findViewByIds(Activity activity, View.OnClickListener listener){
+        forgetBtn = (TextView) activity.findViewById(R.id.forget_btn);
+        getNumBtn = (TextView)activity.findViewById(R.id.getNumBtn);
+        numText = (EditText) activity.findViewById(R.id.forget_num_text);
+        phoneText = (EditText)activity.findViewById(R.id.forget_id_text);
+        rightBtn = (TextView)activity.findViewById(R.id.right_btn);
+        leftImage = (ImageView)activity.findViewById(R.id.left_img);
+
+        forgetBtn.setOnClickListener(listener);
+        getNumBtn.setOnClickListener(listener);
+        leftImage.setOnClickListener(listener);
+    }
+
+    public void clear(){
+        forgetBtn = null;
+        getNumBtn = null;
+        numText = null;
+        phoneText = null;
+        rightBtn = null;
+        leftImage = null;
+    }
+
+}

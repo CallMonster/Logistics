@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_radio_btn"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:drawableTop="@drawable/tab_home_icon_selector"
+    android:text="@string/home"
+    style="@style/tab_button_style"/>

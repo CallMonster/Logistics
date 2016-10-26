@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="@dimen/space_10"
+    android:paddingBottom="@dimen/space_10"
+    android:background="@color/colorWhite">
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="30dp">
+        <com.zt.hackman.customshape.widget.CircleImageView
+            android:id="@+id/movementHead"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/default_circle_image"
+            android:layout_centerHorizontal="true"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/crown"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    <TextView android:id="@+id/movementName"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="郑师傅"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/font_14"/>
+
+    <TextView android:id="@+id/movementReason"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="本周最佳司机"
+        android:layout_marginTop="@dimen/space_8"
+        android:textColor="@color/grey_normal"
+        android:textSize="@dimen/font_12"/>
+
+    <TextView android:id="@+id/movementComment"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="累计140 好评率90%"
+        android:layout_marginTop="@dimen/space_8"
+        android:textColor="@color/grey_normal"
+        android:textSize="@dimen/font_12"/>
+</LinearLayout>

@@ -1,0 +1,1 @@
+include ':app', ':selectphotoLib', ':PicassoLib', ':convenientbanner'

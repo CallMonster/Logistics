@@ -1,0 +1,53 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.event.ExitEvent;
+import com.zt.hackman.utils.ToastUtils;
+
+import org.simple.eventbus.EventBus;
+
+/**
+ * Created by Administrator on 2016/9/27.
+ */
+public class ValidPhoneModel implements View.OnClickListener{
+
+    public TextView getNumberBtn,nextBtn,flagText;
+    public EditText numberText;
+    public RelativeLayout validPhoneNav;
+
+    private BaseActivity activity;
+
+    public void findViewByIds(BaseActivity activity){
+        this.activity = activity;
+        getNumberBtn =(TextView) activity.findViewById(R.id.getNumberBtn);
+        nextBtn = (TextView)activity.findViewById(R.id.validPhoneNextBtn);
+        flagText = (TextView)activity.findViewById(R.id.validPhoneFlagText);
+        validPhoneNav = (RelativeLayout)activity.findViewById(R.id.bank_phone_valid_nav);
+        numberText = (EditText)activity.findViewById(R.id.bank_phoneNumberEdit);
+
+        validPhoneNav.setBackgroundResource(R.color.colorWhite);
+        nextBtn.setOnClickListener(this);
+        getNumberBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.getNumberBtn:
+                break;
+
+            case R.id.validPhoneNextBtn:
+                ToastUtils.showSuccess(activity,"修改银行卡成功");
+                activity.finish();
+                EventBus.getDefault().post(new ExitEvent(ExitEvent.TYPE_CLOSE));
+                break;
+        }
+    }
+}

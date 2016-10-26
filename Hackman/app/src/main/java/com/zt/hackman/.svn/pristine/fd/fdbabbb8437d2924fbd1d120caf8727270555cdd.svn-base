@@ -1,0 +1,193 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.OrderDetailClaimActivity;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.base.widget.ProgressActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.OrderResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.GsonUtils;
+import com.zt.hackman.utils.PreferencesUtils;
+import com.zt.hackman.utils.StringUtils;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class MyOrderModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener{
+    public ExpendRecycleView listView;
+    public SwipeRefreshLoadMore swipeMore;
+    public AbsRVAdapter<OrderResponse> adapter;
+    private ProgressActivity progressActivity;
+    private int current = 1;
+    private Activity ac;
+    private int orderId;
+    private List<OrderResponse> orderResponses ;
+
+    public void findViewByIds(View view,Activity ac){
+        this.ac = ac;
+        progressActivity = (ProgressActivity)view.findViewById(R.id.myorder_progressActivity);
+        listView = (ExpendRecycleView) view.findViewById(R.id.order_list_view);
+        swipeMore = (SwipeRefreshLoadMore)view.findViewById(R.id.order_swipe_more);
+    }
+
+    public void init(final Activity context,int orderId){
+        initData(orderId);
+        //R.color.colorPrimary, R.color.colorBlack,
+        swipeMore.setColorSchemeColors(new int[]{ R.color.colorAccent});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        listView.setLayoutManager(linearLayoutManager);
+
+    }
+
+    StringCallback listCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            progressActivity.showError("网络请求异常", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    initData(orderId);
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Response res = new Response(response,ac);
+            String content = null;
+            if(res.code>0){
+                try {
+                    JSONObject jsonObject = new JSONObject(res.data);
+                    content = jsonObject.getString("orderList");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                orderResponses = (List<OrderResponse>) GsonUtils.jsonToList(content,new TypeToken<List<OrderResponse>>(){}.getType());
+                if(orderResponses==null||orderResponses.size()<=0){
+                    progressActivity.showEmpty(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            initData(orderId);
+                        }
+                    });
+                }else {
+                    if(adapter!=null){
+                        adapter.refreshData(orderResponses);
+                        //MyOrderModel.this.onRefresh();
+                    }else {
+                        adapter = new AbsRVAdapter<OrderResponse>
+                                (listView, orderResponses, R.layout.adapter_myorder_claim) {
+                            @Override
+                            public void showData(ViewHolder vHolder, final OrderResponse data, int position) {
+                                if(data!=null) {
+                                    TextView statusView = (TextView) vHolder.getView(R.id.adapter_order_status_text);
+                                    if(data.orderStatus!=null&&!StringUtils.isEmpty(data.orderStatus)) {
+                                        int orderStatus = Integer.parseInt(data.orderStatus);
+                                        switch (orderStatus) {
+                                            case 0:
+                                                statusView.setText("待结算");
+                                                break;
+                                            case 3:
+                                                statusView.setText("待取货");
+                                                break;
+                                            case 4:
+                                                statusView.setText("待送达");
+                                                break;
+                                        }
+                                    }
+                                    //以下为点击对应视图，跳转到对应界面，根据orderStatus进行判断
+                                    LinearLayout rootView = (LinearLayout) vHolder.getView(R.id.order_linear_root);
+                                    rootView.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = new Intent(ac, OrderDetailClaimActivity.class);
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString(Constant.INTNENTS.INTENT_ORDER_ID, data.id);
+                                            if("0".equals(data.orderStatus)) {
+                                                bundle.putInt(Constant.INTNENTS.INTENT_ORDER_STATUS,1 );
+                                            }else{
+                                                bundle.putInt(Constant.INTNENTS.INTENT_ORDER_STATUS,0);
+                                            }
+                                            intent.putExtras(bundle);
+                                            ac.startActivity(intent);
+                                        }
+                                    });
+                                }
+                            }
+
+                        };
+                        listView.setAdapter(adapter);
+                        swipeMore.setOnRefreshListener(MyOrderModel.this);
+                        swipeMore.setOnLoadListener(MyOrderModel.this);
+                    }
+                }
+
+                progressActivity.showContent();
+            }else{
+
+            }
+        }
+    };
+
+    private void initData(int orderId){
+        this.orderId = orderId;
+        progressActivity.showLoading();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","orderList");
+            String sid = PreferencesUtils.getSID(ac);
+            if(sid!=null){
+                jsonObject.put("sid", PreferencesUtils.getSID(ac));
+            }
+
+            switch (orderId){
+                case 0:
+                    jsonObject.put("orderStatus","3");
+                    break;
+                case 1:
+                    jsonObject.put("orderStatus","4");
+                    break;
+                case 2:
+                    jsonObject.put("orderStatus","5");
+                    break;
+            }
+            jsonObject.put("page",""+current);
+            jsonObject.put("limit",""+ Constant.order_pageSize);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(ac,"数据转换异常",Toast.LENGTH_SHORT).show();
+        }
+        new HackRequest().request(jsonObject.toString(),listCallBack,Constant.TEST_HOST);
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+}

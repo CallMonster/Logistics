@@ -1,0 +1,68 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.RelativeLayout;
+
+import com.zt.hackman.R;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.response.MessageResponse;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/26.
+ */
+public class MessageCenterModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener{
+
+    public RelativeLayout messageCenterNav;
+    public ExpendRecycleView recycleView;
+    public SwipeRefreshLoadMore loadMore;
+
+    public void findViewByIds(Activity activity){
+        recycleView = (ExpendRecycleView)activity.findViewById(R.id.order_list_view);
+        loadMore = (SwipeRefreshLoadMore) activity.findViewById(R.id.order_swipe_more);
+        messageCenterNav = (RelativeLayout) activity.findViewById(R.id.message_center_nav);
+
+        messageCenterNav.setBackgroundResource(R.color.colorWhite);
+    }
+
+    public void init(Activity activity, List<MessageResponse> messages){
+        loadMore.setColorSchemeColors(new int[]{R.color.tab_seleted});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recycleView.setLayoutManager(linearLayoutManager);
+        AbsRVAdapter<MessageResponse> adapter = new AbsRVAdapter<MessageResponse>
+                (recycleView, messages, R.layout.adapter_message) {
+            @Override
+            public void showData(ViewHolder vHolder,MessageResponse data, int position) {
+
+            }
+
+        };
+        adapter.setOnItemClickListener(new AbsRVAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //context.startActivity(new Intent(context, OrderDetailReciverActivity.class));
+            }
+        });
+        recycleView.setAdapter(adapter);
+        loadMore.setOnRefreshListener(this);
+        loadMore.setOnLoadListener(this);
+        this.onRefresh();
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+}

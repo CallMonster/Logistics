@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@mipmap/main_bg">
+
+    <include layout="@layout/nav_layout"
+        android:id="@+id/hackman_one_layout"
+        />
+    <TextView style="@style/main_text"
+        android:text="真实姓名"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_25"/>
+    <EditText android:hint="请输入您的真实姓名"
+        style="@style/main_edit"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_10"
+        android:id="@+id/oneUserName"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_normal"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"/>
+    <TextView style="@style/main_text"
+        android:text="身份证号码"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_15"/>
+    <EditText android:hint="请输入15位或18位数字"
+        style="@style/main_edit"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_10"
+        android:id="@+id/oneIdenNumber"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_normal"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"/>
+
+    <RelativeLayout android:layout_marginTop="@dimen/space_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView style="@style/main_text"
+            android:text="上传身份证正反面照片"
+            android:layout_marginLeft="@dimen/space_30"
+            />
+        <TextView android:id="@+id/text_four_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tan"
+            android:text="范例"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_30"
+            android:textColor="@color/tab_seleted"
+            android:drawablePadding="@dimen/space_8"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_120"
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <RelativeLayout android:id="@+id/oneFrontBtn"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="@dimen/space_10"
+            android:background="@color/photo_bg"
+            >
+            <ImageView android:src="@mipmap/add_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:layout_centerInParent="true"/>
+            <TextView style="@style/login_text"
+                android:text="正面"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/space_25"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/oneReserveBtn"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="@dimen/space_10"
+            android:background="@color/photo_bg">
+            <ImageView android:src="@mipmap/add_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:scaleType="centerInside"/>
+            <TextView style="@style/login_text"
+                android:text="反面"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/space_25"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout android:layout_marginTop="@dimen/space_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView style="@style/main_text"
+            android:text="上传驾驶证照片"
+            android:layout_marginLeft="@dimen/space_30"
+            />
+        <TextView android:id="@+id/text_five_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tan"
+            android:text="范例"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_30"
+            android:textColor="@color/tab_seleted"
+            android:drawablePadding="@dimen/space_8"/>
+    </RelativeLayout>
+    
+    <ImageView android:id="@+id/driving_licence_photo_btn"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:background="@color/photo_bg"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_15"
+        android:src="@mipmap/add_photo"
+        android:scaleType="centerInside"/>
+
+
+    <TextView style="@style/main_text"
+        android:text="企业编号(选填)"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_15"/>
+    <EditText android:hint="你所在企业的营业编号"
+        style="@style/main_edit"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_10"
+        android:id="@+id/oneEnNumberText"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/grey_normal"
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"/>
+    <RelativeLayout android:layout_marginTop="@dimen/space_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView style="@style/main_text"
+            android:text="上传营业资格证(可选)"
+            android:layout_marginLeft="@dimen/space_30"
+            />
+        <TextView android:id="@+id/text_six_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tan"
+            android:text="范例"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_30"
+            android:textColor="@color/tab_seleted"
+            android:drawablePadding="@dimen/space_8"/>
+    </RelativeLayout>
+
+    <ImageView android:id="@+id/business_certificate_photo_btn"
+        android:layout_width="150dp"
+        android:layout_height="120dp"
+        android:background="@color/photo_bg"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_15"
+        android:src="@mipmap/add_photo"
+        android:scaleType="centerInside"/>
+</LinearLayout>
+
+</ScrollView>

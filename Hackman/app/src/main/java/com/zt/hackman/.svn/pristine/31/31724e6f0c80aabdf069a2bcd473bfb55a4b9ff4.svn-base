@@ -1,0 +1,137 @@
+package com.zt.hackman.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.MessageCenterAcitivty;
+import com.zt.hackman.adapter.MovementAdapter;
+import com.zt.hackman.adapter.NewsAdapter;
+import com.zt.hackman.adapter.RecommendAdapter;
+import com.zt.hackman.base.BaseFragment;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+import com.zt.hackman.model.HomeModel;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.utils.DisplayUtil;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/13.
+ */
+public class HomeFragment extends BaseFragment implements LeftListener{
+
+    private View view;
+    private NavModel navModel;
+    private HomeModel homeModel;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_home,container,false);
+        super.onCreateView(inflater,container,savedInstanceState);
+        return view;
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(view);
+        navModel.setTitle(R.mipmap.logo);
+        navModel.setLeftBtn(R.mipmap.navi_message);
+        navModel.setLeftListener(this);
+    }
+    @Override
+    protected void findViewByIds() {
+        homeModel = new HomeModel();
+        homeModel.findViewByIds(view,getActivity());
+
+    }
+    @Override
+    protected void initData() {
+
+    }
+    @Override
+    protected void initView() {
+        //轮播图
+        List<Integer> datas = new ArrayList<Integer>();
+        datas.add(R.mipmap.home_bg);
+        datas.add(R.mipmap.black_bg);
+        datas.add(R.mipmap.main_bg);
+        homeModel.startBanner(datas);
+
+        //以下为GridView推送消息
+        List<HomeResponse.Movement> movements = new ArrayList<HomeResponse.Movement>();
+        MovementAdapter adapter = new MovementAdapter(getActivity());
+
+        //homeModel.initMovement(adapter);
+        HomeResponse.Movement movement = new HomeResponse.Movement();
+        movement.comment="我海峡";
+        movement.headportrait=1;
+        movement.level=2;
+        movement.name="我海峡";
+        movement.reason="我海峡";
+
+        HomeResponse.Movement movement1 = new HomeResponse.Movement();
+        movement1.comment="我海峡";
+        movement1.headportrait=1;
+        movement1.level=2;
+        movement1.name="我海峡";
+        movement1.reason="我海峡";
+
+        movements.add(movement);
+        movements.add(movement1);
+        homeModel.gridView.setAdapter(adapter);
+        adapter.refreshData(movements);
+
+        //推送消息
+        List<HomeResponse.RecommendInfo> recomms = new ArrayList<HomeResponse.RecommendInfo>();
+        HomeResponse.RecommendInfo info = new HomeResponse.RecommendInfo();
+        info.flag=0;
+        info.msg = "我还在等待着你呢";
+
+        HomeResponse.RecommendInfo info1 = new HomeResponse.RecommendInfo();
+        info1.flag=0;
+        info1.msg = "我还在等待着你呢";
+        recomms.add(info);
+        recomms.add(info1);
+
+        RecommendAdapter radapter = new RecommendAdapter(getActivity());
+        homeModel.recommendListView.setAdapter(radapter);
+        radapter.refreshData(recomms);
+
+        //以下为新闻资讯
+        HomeResponse.News news = new HomeResponse.News();
+        HomeResponse.News news1 = new HomeResponse.News();
+        HomeResponse.News news2 = new HomeResponse.News();
+        List<HomeResponse.News> newses = new ArrayList<HomeResponse.News>();
+
+        newses.add(news);
+        newses.add(news1);
+        newses.add(news2);
+
+        homeModel.initNews(newses,getActivity());
+    }
+
+
+    @Override
+    public void leftClick() {
+        startActivity(MessageCenterAcitivty.class);
+    }
+}

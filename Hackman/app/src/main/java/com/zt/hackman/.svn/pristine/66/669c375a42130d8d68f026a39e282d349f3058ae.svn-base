@@ -1,0 +1,16 @@
+package com.zt.hackman.constant;
+
+/**
+ * Created by Administrator on 2016/9/21.
+ */
+public class Constant {
+    public static class URLS{
+
+    }
+
+    public static class INTNENTS{
+        public static final int IMAGE_PICKER= 205;
+    }
+
+
+}

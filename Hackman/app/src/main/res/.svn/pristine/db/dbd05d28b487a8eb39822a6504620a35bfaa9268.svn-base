@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+
+    <LinearLayout android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/grey_low">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/update_second_phone_nav"/>
+        <RelativeLayout android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_height="44dp">
+            <EditText android:id="@+id/user_name_second_edit"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:hint="紧急联系人"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"/>
+
+            <ImageView android:id="@+id/clear_name_second_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/clear"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_height="44dp">
+            <EditText android:id="@+id/user_second_phone_edit"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:hint="紧急联系人电话"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:inputType="number"/>
+
+            <ImageView android:id="@+id/clear_second_phone_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/clear"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView android:id="@+id/update_second_phone_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/tab_seleted"
+        android:text="保存"
+        android:textColor="@color/colorWhite"
+        android:gravity="center"
+        android:textSize="@dimen/font_14"/>
+
+</LinearLayout>

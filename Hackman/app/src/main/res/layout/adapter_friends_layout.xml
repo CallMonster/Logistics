@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="@drawable/view_selector">
+    <com.zt.hackman.customshape.widget.CircleImageView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/adapter_friends_img"
+        android:src="@mipmap/default_circle_image"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+    <TextView android:id="@+id/invent_friends_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="邀请"
+        android:textColor="@color/tab_seleted"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_centerVertical="true"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/adapter_friends_name"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/grey_normal"
+        android:layout_toRightOf="@id/adapter_friends_img"
+        android:text="阿德"
+        android:layout_marginLeft="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_10"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/adapter_friends_phone"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/home_grey"
+        android:layout_toRightOf="@id/adapter_friends_img"
+        android:text="138020202122"
+        android:layout_marginLeft="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_5"
+        android:layout_below="@id/adapter_friends_name"/>
+</RelativeLayout>

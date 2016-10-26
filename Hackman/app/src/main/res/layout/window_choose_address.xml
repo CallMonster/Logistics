@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/drak_transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/window_area_root_view"
+    tools:context=".activity.UpdateAddressActvitiy">
+    <RelativeLayout android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@color/colorWhite">
+        <RelativeLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:id="@+id/label20"
+            >
+            <TextView android:textSize="@dimen/font_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/tab_normal"
+                android:layout_centerVertical="true"
+                android:id="@+id/window_area_cancel_btn"/>
+
+            <TextView android:textSize="@dimen/font_14"
+                android:id="@+id/window_area_confirm_btn"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="确定"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/tab_seleted"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <LinearLayout android:layout_marginTop="@dimen/space_8"
+            android:layout_width="match_parent"
+            android:layout_below="@id/label20"
+            android:layout_height="match_parent">
+            <com.zt.hackman.view.WheelView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:unitHight="44dp"
+                app:background="@color/wheel_bg"
+                app:lineHeight="1dp"
+                app:selectedTextColor="@color/wheel_selected_text"
+                app:normalTextColor="@color/wheel_unselected_text"
+                app:lineColor="@color/wheel_line"
+                app:selectedTextSize="@dimen/font_14"
+                app:normalTextSize="12sp"
+                android:id="@+id/province_wheel"/>
+            <com.zt.hackman.view.WheelView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:lineColor="@color/wheel_line"
+                app:background="@color/wheel_bg"
+                app:selectedTextColor="@color/wheel_selected_text"
+                app:normalTextColor="@color/wheel_unselected_text"
+                app:unitHight="44dp"
+                app:selectedTextSize="@dimen/font_14"
+                app:normalTextSize="12sp"
+                app:lineHeight="1dp"
+                android:id="@+id/city_wheel"/>
+            <com.zt.hackman.view.WheelView
+                android:layout_marginLeft="@dimen/space_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:lineColor="@color/wheel_line"
+                app:selectedTextColor="@color/wheel_selected_text"
+                app:normalTextColor="@color/wheel_unselected_text"
+                app:selectedTextSize="@dimen/font_14"
+                app:normalTextSize="12sp"
+                app:background="@color/wheel_bg"
+                app:unitHight="44dp"
+                app:lineHeight="1dp"
+                android:id="@+id/area_wheel"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

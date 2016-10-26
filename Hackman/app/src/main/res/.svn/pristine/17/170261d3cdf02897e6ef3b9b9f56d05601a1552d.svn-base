@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:background="@color/grey_low"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+                <RelativeLayout android:background="@mipmap/personal_head_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="196dp"
+                    android:id="@+id/my_top_layout">
+
+                    <RelativeLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/my_head_layout"
+                        android:layout_marginTop="@dimen/space_20">
+                        <com.zt.hackman.customshape.widget.CircleImageView
+                            android:id="@+id/my_head_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@mipmap/default_circle_image"/>
+                        <ImageView android:id="@+id/head_flag"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:src="@mipmap/state_no_approve"/>
+                    </RelativeLayout>
+                    <TextView android:text="阳光"
+                        android:layout_marginTop="@dimen/space_15"
+                        android:layout_below="@id/my_head_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/userName"
+                        android:layout_centerHorizontal="true"
+                        android:textSize="@dimen/font_14"
+                        android:textColor="@color/colorWhite"/>
+                    <TextView android:text="ZT 110000"
+                        android:layout_below="@id/userName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/my_plate_number"
+                        android:textSize="@dimen/font_12"
+                        android:layout_marginTop="@dimen/space_8"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="@color/colorWhite"/>
+
+                    <TextView android:text="师傅还未接单"
+                        android:layout_marginTop="@dimen/space_3"
+                        android:layout_below="@id/my_plate_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/my_comment"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/font_12"
+                        android:layout_centerHorizontal="true"/>
+                    <include layout="@layout/nav_layout"
+                        android:id="@+id/fragment_personal_nav"
+                        />
+                </RelativeLayout>
+
+                <!-- 我的历史订单 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:id="@+id/my_order_relative">
+                    <ImageView android:id="@+id/my_order_icon"
+                        android:src="@mipmap/my_order_icon"
+                        style="@style/my_icon_style"/>
+                    <TextView style="@style/my_text_style"
+                        android:text="我的历史订单"
+                        android:layout_toRightOf="@id/my_order_icon"/>
+                    <ImageView style="@style/my_derection_style"
+                        android:id="@+id/my_order_right"/>
+                    <TextView android:layout_toLeftOf="@id/my_order_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看全部订单"
+                        android:layout_marginRight="@dimen/space_10"
+                        android:layout_centerVertical="true"
+                        android:textSize="@dimen/font_12"/>
+                </RelativeLayout>
+                <!-- 邀请朋友 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/my_wallet_relative">
+                    <ImageView android:id="@+id/my_wallet_icon"
+                        android:src="@mipmap/list_my_wallet"
+                        style="@style/my_icon_style"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                    <TextView style="@style/my_text_style"
+                        android:text="我的钱包"
+                        android:layout_toRightOf="@id/my_wallet_icon"/>
+                    <ImageView style="@style/my_derection_style"/>
+                </RelativeLayout>
+
+                <!-- 邀请朋友 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/my_friends_relative">
+                    <ImageView android:id="@+id/my_friends_icon"
+                        android:src="@mipmap/my_icon"
+                        style="@style/my_icon_style"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                    <TextView style="@style/my_text_style"
+                        android:text="邀请好友"
+                        android:layout_toRightOf="@id/my_friends_icon"/>
+                    <ImageView style="@style/my_derection_style"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_1"
+                    android:background="@color/grey_low"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                <!-- 建议意见 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:id="@+id/my_idea_relative">
+                    <ImageView android:id="@+id/my_idea_icon"
+                        android:src="@mipmap/my_idea_icon"
+                        style="@style/my_icon_style"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                    <TextView style="@style/my_text_style"
+                        android:text="意见建议"
+                        android:layout_toRightOf="@id/my_idea_icon"/>
+                    <ImageView style="@style/my_derection_style"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_1"
+                    android:background="@color/grey_low"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                <!-- 联系我们 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:id="@+id/my_contract_relatvie">
+                    <ImageView android:id="@+id/call"
+                        android:src="@mipmap/navi_call_selected"
+                        style="@style/my_icon_style"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                    <TextView style="@style/my_text_style"
+                        android:text="联系我们"
+                        android:layout_toRightOf="@id/call"/>
+                    <ImageView style="@style/my_derection_style"/>
+                </RelativeLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_1"
+                    android:background="@color/grey_low"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                <!-- 关于 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:id="@+id/my_about_relative">
+                    <ImageView android:id="@+id/my_about_img"
+                        android:src="@mipmap/my_about_icon"
+                        style="@style/my_icon_style"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+                    <TextView style="@style/my_text_style"
+                        android:text="关于我们"
+                        android:layout_toRightOf="@id/my_about_img"/>
+                    <ImageView style="@style/my_derection_style"
+                        android:id="@+id/my_friends_right"/>
+                </RelativeLayout>
+
+                <!-- 关于 -->
+                <RelativeLayout android:background="@drawable/view_selector"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="@dimen/space_20"
+                    android:id="@+id/my_setting_relative">
+                    <ImageView android:id="@+id/my_setting_img"
+                        android:src="@mipmap/my_setting_icon"
+                        style="@style/my_icon_style"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+                    <TextView style="@style/my_text_style"
+                        android:text="设置"
+                        android:layout_toRightOf="@id/my_setting_img"/>
+                    <ImageView style="@style/my_derection_style"/>
+                </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

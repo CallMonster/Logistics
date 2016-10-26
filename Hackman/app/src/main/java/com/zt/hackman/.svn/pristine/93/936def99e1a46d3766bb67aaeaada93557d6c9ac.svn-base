@@ -1,0 +1,23 @@
+package com.zt.hackman.model;
+
+import android.widget.ImageView;
+import android.widget.TextView;
+
+/**
+ * Created by Administrator on 2016/9/13.
+ */
+public class LoginModel {
+    public TextView loginPwd,loginId,rightClick;
+    public ImageView leftClick;
+
+    public void login(){
+
+    }
+
+    public void clear(){
+        loginPwd = null;
+        loginId = null;
+        rightClick = null;
+        leftClick = null;
+    }
+}

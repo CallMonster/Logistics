@@ -1,0 +1,63 @@
+package com.zt.hackman.adapter;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.CyBaseAdapter;
+import com.zt.hackman.response.QuestionResponse;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class CauseAdapter extends CyBaseAdapter<QuestionResponse.Cause> {
+    private int index;
+
+    public CauseAdapter(Context context) {
+        super(context);
+    }
+
+    public void refreshData(List<QuestionResponse.Cause> list,int index) {
+        this.index = index;
+        super.refreshData(list);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = new ViewHolder();
+        if(convertView == null){
+            convertView = inflater.inflate(R.layout.adapter_cause_layout,parent,false);
+
+            holder.textView = (TextView)convertView.findViewById(R.id.adapter_cause_text);
+            holder.imageView = (ImageView)convertView.findViewById(R.id.adapter_cause_img);
+
+            convertView.setTag(holder);
+        }else{
+            holder= (ViewHolder) convertView.getTag();
+        }
+
+        if(index ==-1){
+            holder.imageView.setVisibility(View.GONE);
+
+        }else{
+            if(position== index){
+                holder.imageView.setVisibility(View.VISIBLE);
+            }else{
+                holder.imageView.setVisibility(View.GONE);
+            }
+        }
+        holder.textView.setText(dataList.get(position).name);
+
+        return convertView ;
+    }
+
+    class ViewHolder{
+        TextView textView;
+        ImageView imageView;
+    }
+}

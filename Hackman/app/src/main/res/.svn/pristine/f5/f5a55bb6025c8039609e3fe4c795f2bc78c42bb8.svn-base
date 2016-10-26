@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/personal_center_activity_nav"/>
+    <ScrollView android:background="@color/grey_low"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/grey_low">
+
+            <RelativeLayout android:background="@drawable/view_selector"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:id="@+id/user_head_layout">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的头像"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    />
+                <ImageView android:id="@+id/label23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/derection_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+                <com.zt.hackman.customshape.widget.CircleImageView
+                    android:id="@+id/user_head_img"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@mipmap/default_image"
+                    android:layout_toLeftOf="@id/label23"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/space_8"/>
+            </RelativeLayout>
+            <!-- 姓名-->
+            <RelativeLayout android:background="@drawable/view_selector"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:id="@+id/user_name_layout"
+                android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="姓名"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    />
+                <ImageView android:id="@+id/label24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/derection_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+                <TextView android:id="@+id/user_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="常友"
+                    android:layout_toLeftOf="@id/label24"
+                    android:layout_marginRight="@dimen/space_8"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/grey_normal"/>
+            </RelativeLayout>
+
+            <!-- 地址-->
+            <RelativeLayout android:background="@drawable/view_selector"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:id="@+id/user_address_layout"
+                android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="家庭地址"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    />
+                <ImageView android:id="@+id/label25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/derection_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+                <TextView android:id="@+id/user_address_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="天津西青"
+                    android:layout_toLeftOf="@id/label25"
+                    android:layout_marginRight="@dimen/space_8"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/grey_normal"/>
+            </RelativeLayout>
+
+            <!-- 个人电话 -->
+            <RelativeLayout android:background="@drawable/view_selector"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:id="@+id/user_phone_layout"
+                android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个人电话"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    />
+                <ImageView android:id="@+id/label26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/derection_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+                <TextView android:id="@+id/user_phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18502621908"
+                    android:layout_toLeftOf="@id/label26"
+                    android:layout_marginRight="@dimen/space_8"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/grey_normal"/>
+            </RelativeLayout>
+
+            <!-- 个人电话 -->
+            <RelativeLayout android:background="@drawable/view_selector"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:id="@+id/user_second_phone_layout"
+                android:layout_marginTop="1dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="紧急联系人"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    />
+                <ImageView android:id="@+id/label27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/derection_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+                <TextView android:id="@+id/user_second_phone_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="18502621908"
+                    android:layout_toLeftOf="@id/label27"
+                    android:layout_marginRight="@dimen/space_8"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/font_14"
+                    android:textColor="@color/grey_normal"/>
+            </RelativeLayout>
+
+            <!-- 个人电话 -->
+            <RelativeLayout android:background="@drawable/view_selector"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:id="@+id/hackman_state_layout"
+                android:layout_marginTop="@dimen/space_15">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正通司机状态"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:textSize="@dimen/font_14"
+                    />
+                <ImageView android:id="@+id/label28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/derection_icon"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+                <ImageView android:id="@+id/user_state_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/label28"
+                    android:layout_marginRight="@dimen/space_8"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/state_already_approve"
+                    android:textColor="@color/grey_normal"/>
+                <TextView android:id="@+id/user_state_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="未认证"
+                    android:layout_toLeftOf="@id/user_state_img"
+                    android:layout_marginRight="@dimen/space_5"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/font_14"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/grey_low">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/bank_phone_valid_nav"/>
+        <TextView android:id="@+id/validPhoneFlagText"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="发送验证码成功"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:textColor="@color/colorGrey"/>
+        <RelativeLayout android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorWhite"
+            android:layout_height="@dimen/space_44">
+            <EditText android:id="@+id/bank_phoneNumberEdit"
+                android:layout_width="@dimen/space_200"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:hint="输入短信验证码"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/colorGrey"/>
+
+            <TextView android:id="@+id/getNumberBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="获取验证码"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/font_14"
+                android:textColor="@color/tab_seleted"
+                />
+
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView android:id="@+id/validPhoneNextBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="下一步"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:background="@color/tab_seleted"
+        android:textSize="@dimen/font_14"/>
+
+</LinearLayout>

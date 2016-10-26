@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.zt.hackman"
+        minSdkVersion 17
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+
+        multiDexEnabled true
+
+        manifestPlaceholders = [
+                GETUI_APP_ID    : "HRifkBTYzl8GfhZ7KDZod8",
+                GETUI_APP_KEY   : "KHwjGCx4vx9ELl3i90SSC4",
+                GETUI_APP_SECRET: "gOTQt51pwj7xHq8gqPgUw2",
+                PACKAGE_NAME    : applicationId
+        ]
+
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "mips", "mips64", "x86", "x86_64"
+        }
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile files('libs/universal-image-loader-1.9.5.jar')
+    compile files('libs/simple_eventbus.jar')
+    compile 'com.android.support:design:23.4.0'
+    compile 'com.zhy:okhttputils:2.0.0'
+    //轮播广告
+    compile 'com.bigkoo:convenientbanner:2.0.5'
+    compile 'com.lzy.widget:imagepicker:+'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile files('libs/AMap_Location_V2.4.1_20160414.jar')
+    compile files('libs/AMap_2DMap_V2.9.0_20160525.jar')
+
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.1.3@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.1.3@aar'
+    compile 'com.getui:sdk:+'
+    compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.wuxiaolong.pullloadmorerecyclerview:library:1.1.1'
+}

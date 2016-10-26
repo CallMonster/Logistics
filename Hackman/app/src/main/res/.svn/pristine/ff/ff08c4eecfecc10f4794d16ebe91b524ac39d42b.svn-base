@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/drak_transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/window_root_view">
+    <RelativeLayout android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@color/colorWhite">
+        <LinearLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/label5"
+            android:layout_alignParentBottom="true">
+            <TextView android:textSize="@dimen/font_14"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="取消"
+                android:layout_weight="1"
+                android:textColor="@color/tab_normal"
+                android:gravity="center"
+                android:id="@+id/window_cancel_btn"/>
+
+            <TextView android:textSize="@dimen/font_14"
+                android:id="@+id/window_confirm_btn"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:text="确定"
+                android:textColor="@color/tab_seleted"
+                android:gravity="center"
+                android:layout_weight="1"/>
+        </LinearLayout>
+        <ListView android:id="@+id/window_cause_list_ivew"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/label5"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:text="选择异常问题"
+            android:layout_above="@id/window_cause_list_ivew"
+            android:textColor="@color/home_grey"
+            android:textSize="@dimen/font_12"/>
+    </RelativeLayout>
+</RelativeLayout>

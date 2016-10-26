@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_low">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/fragment_order_nav"/>
+
+    <com.zt.hackman.view.SmartTabLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/colorWhite"
+        android:id="@+id/tabLayout"
+        android:layout_below="@id/fragment_order_nav"/>
+    <View android:id="@+id/label13"
+        android:layout_below="@id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_5"
+        android:background="@color/grey_low"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/orderViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/label13"/>
+    <ImageView android:id="@+id/logout_img"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/space_30"
+        android:src="@mipmap/btn_online"
+        android:layout_marginBottom="@dimen/space_30"
+        android:scaleType="fitXY"
+        android:background="@null"/>
+
+</RelativeLayout>

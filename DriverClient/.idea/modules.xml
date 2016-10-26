@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/DriverClient.iml" filepath="$PROJECT_DIR$/DriverClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PicassoLib/PicassoLib.iml" filepath="$PROJECT_DIR$/PicassoLib/PicassoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/convenientbanner/convenientbanner.iml" filepath="$PROJECT_DIR$/convenientbanner/convenientbanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/selectphotoLib/selectphotoLib.iml" filepath="$PROJECT_DIR$/selectphotoLib/selectphotoLib.iml" />
+    </modules>
+  </component>
+</project>

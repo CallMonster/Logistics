@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/frag_viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_color" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_bottom_tab"
+            android:orientation="horizontal">
+
+            <com.qxsx.chaersi.driverclient.widget.ShadowColorView
+                android:id="@+id/id_indicator_one"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:shadow_color="@color/bottom_bg_color"
+                app:shadow_icon="@mipmap/home_normal_icon"
+                app:shadow_text="首页"
+                app:shadow_text_size="12sp" />
+
+            <com.qxsx.chaersi.driverclient.widget.ShadowColorView
+                android:id="@+id/id_indicator_two"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:shadow_color="@color/bottom_bg_color"
+                app:shadow_icon="@mipmap/order_normal_icon"
+                app:shadow_text="订单任务"
+                app:shadow_text_size="12sp" />
+
+            <com.qxsx.chaersi.driverclient.widget.ShadowColorView
+                android:id="@+id/id_indicator_three"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:padding="5dp"
+                app:shadow_color="@color/bottom_bg_color"
+                app:shadow_icon="@mipmap/person_normal_icon"
+                app:shadow_text="我的"
+                app:shadow_text_size="12sp" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

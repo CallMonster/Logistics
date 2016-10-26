@@ -1,0 +1,170 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.base.widget.ProgressActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.event.RefreshEvent;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.response.MessageResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.GsonUtils;
+import com.zt.hackman.utils.LoginUtils;
+import com.zt.hackman.utils.PreferencesUtils;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.simple.eventbus.Subcriber;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/26.
+ */
+public class MessageCenterModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener{
+
+    public RelativeLayout messageCenterNav;
+    public ExpendRecycleView recycleView;
+    public SwipeRefreshLoadMore loadMore;
+    AbsRVAdapter<MessageResponse> adapter;
+     List<MessageResponse> messages;
+    ProgressActivity progressActivity;
+    private BaseActivity ac;
+
+    public void findViewByIds(BaseActivity activity){
+        this.ac = activity;
+        recycleView = (ExpendRecycleView)activity.findViewById(R.id.order_list_view);
+        loadMore = (SwipeRefreshLoadMore) activity.findViewById(R.id.order_swipe_more);
+        messageCenterNav = (RelativeLayout) activity.findViewById(R.id.message_center_nav);
+        progressActivity = (ProgressActivity)activity.findViewById(R.id.message_list_progressActivity);
+
+        messageCenterNav.setBackgroundResource(R.color.colorWhite);
+    }
+
+    @Subcriber
+    public void onEventMain(RefreshEvent refreshEvent){
+        initData();
+    }
+
+    public void init(Activity activity){
+        loadMore.setColorSchemeColors(new int[]{R.color.tab_seleted});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(activity);
+        recycleView.setLayoutManager(linearLayoutManager);
+
+        loadMore.setOnRefreshListener(this);
+        //loadMore.setOnLoadListener(this);
+        this.onRefresh();
+        initData();
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+    StringCallback listCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            progressActivity.showError("网络请求异常", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    initData();
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Response res = new Response(response,ac);
+            if(res.code>0){
+                messages = (List<MessageResponse>) GsonUtils.jsonToList(res.data
+                        ,new TypeToken<List<MessageResponse>>(){}.getType());
+                if(messages==null||messages.size()<=0){
+                    progressActivity.showEmpty(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            initData();
+                        }
+                    });
+                }else {
+                    if(adapter==null) {
+                        adapter = new AbsRVAdapter<MessageResponse>
+                                (recycleView, messages, R.layout.adapter_message) {
+                            @Override
+                            public void showData(ViewHolder vHolder, MessageResponse data, int position) {
+                                ImageView iconView = (ImageView)vHolder.getView(R.id.adapter_message_icon);
+                                TextView titleView = (TextView)vHolder.getView(R.id.adapter_message_title);
+                                TextView timeView = (TextView)vHolder.getView(R.id.adapter_message_time);
+                                TextView contentView = (TextView) vHolder.getView(R.id.adapter_message_content);
+
+                            }
+
+                        };
+                        adapter.setOnItemClickListener(new AbsRVAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, int position) {
+
+                            }
+                        });
+                        ;
+                        recycleView.setAdapter(adapter);
+                    }else{
+                        adapter.refreshData(messages);
+                    }
+
+                }
+            }else{
+                if(res.code==-10){
+                    LoginUtils.toLogin(ac);
+                }else {
+                    progressActivity.showError(res.msg, new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            initData();
+                        }
+                    });
+                }
+            }
+        }
+    };
+
+    /**
+     * 初始化数据
+     */
+    private void initData(){
+        progressActivity.showLoading();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","centerOfMessage");
+            String sid = PreferencesUtils.getSID(ac);
+            if(sid==null){
+                LoginUtils.showDialog(ac,"提示登录","你尚未登录，请登录后访问");
+            }
+            jsonObject.put("sid",sid);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(ac,"数据转换异常",Toast.LENGTH_SHORT).show();
+        }
+        new HackRequest().request(jsonObject.toString(),listCallBack,Constant.TEST_HOST);
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+}

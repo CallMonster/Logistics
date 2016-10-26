@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/drak_transparent"
+    android:fitsSystemWindows="true">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/history_order_nav"/>
+    <include layout="@layout/fragment_my_order"
+        android:id="@+id/history_order_bottom"/>
+</LinearLayout>

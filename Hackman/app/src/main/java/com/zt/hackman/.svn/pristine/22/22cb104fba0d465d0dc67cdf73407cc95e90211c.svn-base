@@ -1,0 +1,138 @@
+package com.zt.hackman.view;
+
+import android.content.Context;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewConfiguration;
+
+import com.zt.hackman.R;
+
+
+/**
+ * 扩展的SwipeRefreshLayout
+ * 包含刷新，加载更多
+ *
+ * @author zhangan
+ *         created at 2016-02-24 23:06
+ */
+public class SwipeRefreshLoadMore extends SwipeRefreshLayout {
+    private int touchSlop; // View滚动的最小距离
+    private View viewFooter; // 底部View
+    private ExpendRecycleView expendRecycleView; // 内部包含的子控件
+    private boolean isLoading = false;// 是否正在加载
+    private boolean isPullUp = false; // 是否上拉
+    private OnLoadListener loadListener; // 加载更多数据的监听
+    private Context context;
+    private float downY; // 按下的y坐标
+    private float lastY; // 最后抬起的y坐标
+
+    public interface OnLoadListener {
+        void onLoadMore();
+    }
+
+    public void setOnLoadListener(OnLoadListener loadListener) {
+        this.loadListener = loadListener;
+    }
+
+    public SwipeRefreshLoadMore(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        this.context = context;
+        touchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
+        // 加载底部的View
+        viewFooter = LayoutInflater.from(context).inflate(R.layout.view_load_more, null);
+    }
+
+    public void setLoadMoreView(int layout) {
+        viewFooter = LayoutInflater.from(context).inflate(layout, null);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        // TODO 获取当前布局下的子控件并设置滚动事件监听
+        super.onLayout(changed, left, top, right, bottom);
+        if (expendRecycleView == null) {
+            for (int i = 0; i < getChildCount(); i++) {
+                if (getChildAt(i) instanceof ExpendRecycleView) {
+                    expendRecycleView = (ExpendRecycleView) getChildAt(i);
+                    break;
+                }
+            }
+            assert expendRecycleView != null;
+            expendRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+                    int lastVisibleItemPosition = 0;
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE && loadListener != null && !isLoading) {
+                        if (layoutManager instanceof GridLayoutManager) {
+                            lastVisibleItemPosition = ((GridLayoutManager) layoutManager).findLastVisibleItemPosition();
+                        } else if (layoutManager instanceof StaggeredGridLayoutManager) {
+                            int[] into = new int[((StaggeredGridLayoutManager) layoutManager).getSpanCount()];
+                            ((StaggeredGridLayoutManager) layoutManager).findLastVisibleItemPositions(into);
+                            lastVisibleItemPosition = findMax(into);
+                        } else {
+                            lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
+                        }
+                        if (layoutManager.getChildCount() > 0
+                                && lastVisibleItemPosition >= layoutManager.getItemCount() - 1 && isPullUp) {
+                            // TODO: 2016-02-24   加载更多
+                            setLoading(true);
+                            loadListener.onLoadMore();
+                        }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                }
+            });
+        }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // TODO 判断是否上拉操作
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                downY = ev.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                lastY = ev.getY();
+                break;
+            case MotionEvent.ACTION_UP:
+                isPullUp = (touchSlop <= downY - lastY);
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    public void setLoading(boolean loading) {
+        isLoading = loading;
+        if (isLoading) { // 正在加载
+            expendRecycleView.addFootView(viewFooter);
+            expendRecycleView.getFootView().get(0).setVisibility(VISIBLE);
+            expendRecycleView.getAdapter().notifyDataSetChanged();
+        } else {// 加载完成
+            expendRecycleView.removeFooterView(viewFooter);
+            expendRecycleView.getAdapter().notifyDataSetChanged();
+        }
+    }
+
+    private int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
+    }
+}

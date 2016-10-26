@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent"
+    android:orientation="vertical">
+    <LinearLayout android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="@color/grey_low"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/idea_nav_layout"/>
+    <EditText
+        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:id="@+id/idea_edit"
+        android:inputType="textMultiLine"
+        android:background="@color/colorWhite"
+        android:hint="请描述对我们的意见"
+        android:gravity="left"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/font_14"/>
+    </LinearLayout>
+    
+    <TextView android:id="@+id/idea_commit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="提交反馈"
+        android:background="@color/tab_seleted"
+        android:gravity="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/font_14"/>
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@drawable/grey_frame_round_conner_white">
+    <ImageView android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/my_about_icon"
+        android:layout_marginTop="@dimen/space_25"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_login_title"
+        android:layout_marginTop="@dimen/space_8"
+        android:text="是否登录"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/font_14"
+        android:textColor="@color/grey_normal"/>
+    <TextView android:textColor="@color/grey_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_login_content"
+        android:layout_marginTop="@dimen/space_15"
+        android:layout_gravity="center"
+        android:text="完成实名制，开始接单吧~"/>
+    <LinearLayout android:orientation="horizontal"
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView android:text="稍后再说"
+            android:background="@drawable/grey_frame"
+            android:id="@+id/dialog_login_left_btn"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/tab_seleted"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView android:layout_weight="1"
+            android:text="立即登录"
+            android:background="@drawable/grey_frame"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/tab_seleted"
+            android:id="@+id/dialog_login_right_btn"/>
+    </LinearLayout>
+</LinearLayout>

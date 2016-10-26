@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zt.hackman">
+
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <!-- 往SDCard写入数据权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <!-- 从SDCard读取数据权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+     
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- iBeancon功能所需权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:name=".base.BaseApp"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="0452f436604b193e8878c6ce5e843051" />
+
+        <!-- 个推SDK配置开始 -->
+        <!-- 配置的第三方参数属性 -->
+        <!--<meta-data-->
+            <!--android:name="PUSH_APPID"-->
+            <!--android:value="HRifkBTYzl8GfhZ7KDZod8" />-->
+        <!--<meta-data-->
+            <!--android:name="PUSH_APPKEY"-->
+            <!--android:value="KHwjGCx4vx9ELl3i90SSC4" />-->
+        <!--<meta-data-->
+            <!--android:name="PUSH_APPSECRET"-->
+            <!--android:value="gOTQt51pwj7xHq8gqPgUw2" />-->
+
+        <activity android:name=".activity.AppStart"
+            android:launchMode="standard"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".activity.MainActivity"
+            android:theme="@style/main"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".activity.HomeActivity"
+            android:theme="@style/main"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.RegisterActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.ClauseActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.ForgetPwdActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.SetpwdActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.EditHackmanOneActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait">
+            </activity>
+
+        <activity android:name=".activity.EditHackmanTwoActivity"
+            android:screenOrientation="portrait">
+            </activity>
+
+        <activity android:name=".activity.HackmanClauseActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:screenOrientation="portrait">
+            </activity>
+
+        <activity android:name=".activity.OrderDetailClaimActivity"
+            android:screenOrientation="portrait" ></activity>
+
+        <activity android:name=".activity.MyWalletActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.ContractUsActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.InventFriendsActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.MessageCenterAcitivty"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.IdeaActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.HappenQuestionClaimActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".activity.HistoryOrderActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.NewsListActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.DepositActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.BankCardListActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.AddBankActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.AddBankTwoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.ValidPhoneActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".activity.PersonalCenterActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.UpdateNameActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.UpdatePhoneActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.UpdateAddressActvitiy"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".activity.ApproveInfoActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.ApproveStateActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.ActionDetailsActivity"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name=".activity.NewPhoneValidActivity"
+            android:screenOrientation="portrait"/>
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService"
+            android:screenOrientation="portrait"></service>
+        <!-- 第三方应用配置 -->
+        <!--<activity-->
+            <!--android:name=".activity.GetuiSdkDemoActivity"-->
+            <!--android:label="@string/app_name"-->
+            <!--android:launchMode="singleTop">-->
+            <!---->
+        <!--</activity>-->
+        <!-- 在上面加入你的你的activity配置 -->
+
+        <!-- 配置第三方Receiver -->
+        <!--<receiver-->
+            <!--android:name=".receiver.PushDemoReceiver"-->
+            <!--android:exported="false">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.igexin.sdk.action.KHwjGCx4vx9ELl3i90SSC4" />-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+    </application>
+
+</manifest>

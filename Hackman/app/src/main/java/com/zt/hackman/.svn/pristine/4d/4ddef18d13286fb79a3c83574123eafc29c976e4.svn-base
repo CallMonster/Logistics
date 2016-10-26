@@ -1,0 +1,99 @@
+package com.zt.hackman.activity;
+
+import android.os.Bundle;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.event.CauseEvent;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.model.EditAddressModel;
+import com.zt.hackman.model.NavModel;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subcriber;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Administrator on 2016/9/27.
+ */
+public class UpdateAddressActvitiy extends BaseActivity implements LeftListener{
+    NavModel navModel;
+    EditAddressModel model;
+    private ArrayList<String> provinces,citys,areas;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+        setContentView(R.layout.activity_address);
+        initNavBar();
+        findViewByIds();
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(this);
+        navModel.setLeftListener(this);
+        navModel.setLeftBtn(R.mipmap.main_back);
+        navModel.setTitle("编辑地址");
+    }
+
+    @Override
+    protected void findViewByIds() {
+        model = new EditAddressModel();
+        model.findViewByIds(this);
+    }
+
+    @Override
+    protected void initView() {
+        hideKeyboard();
+        provinces = new ArrayList<String>();
+        provinces.add("天津市");
+
+        citys = new ArrayList<String>();
+        citys.add("天津市");
+
+        areas = new ArrayList<String>();
+        areas.add("宁河县");
+        areas.add("静海县");
+        areas.add("蓟县");
+        areas.add("和平区");
+        areas.add("河东区");
+        areas.add("河西区");
+        areas.add("南开区");
+        areas.add("河北区");
+        areas.add("红桥区");
+        areas.add("塘沽区");
+        areas.add("汉沽区");
+        areas.add("大港区");
+        areas.add("东丽区");
+        model.initView(provinces,citys,areas);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Subcriber
+    public void onEventMain(CauseEvent event){
+        if(event.type == CauseEvent.TYPE_CAUSE_ADDRESS){
+            model.setArea(event.area);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        model.clear();
+        model = null;
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
+
+    @Override
+    public void leftClick() {
+        onBackPressed();
+    }
+}

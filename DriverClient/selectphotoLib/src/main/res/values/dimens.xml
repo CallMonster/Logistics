@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="image_thumbnail_spacing">5dp</dimen>
+</resources>

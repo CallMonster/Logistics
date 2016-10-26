@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="108dp"
+    android:background="@drawable/view_selector"
+    android:id="@+id/order_linear_root">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+        <TextView android:id="@+id/adapter_order_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_12"
+            android:textColor="@color/darker_gray"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            />
+        <TextView android:id="@+id/adapter_claim_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/tab_seleted"
+            android:text="取货时间：2015年03月18日 15:00"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textSize="@dimen/font_12"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
+        <RelativeLayout android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView android:id="@+id/adapter_start_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/logistic_sender"
+            android:text="西青大学城"
+            android:textColor="@color/colorBlack"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:drawablePadding="@dimen/space_8"/>
+
+        <TextView android:id="@+id/adapter_end_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/logistic_receiver"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/adapter_start_text"
+            android:layout_marginTop="@dimen/space_8"
+            android:text="津南大学城"
+            android:drawablePadding="@dimen/space_8"
+            android:paddingLeft="@dimen/activity_horizontal_margin"/>
+        </RelativeLayout>
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/derection_icon"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_low"/>
+</LinearLayout>

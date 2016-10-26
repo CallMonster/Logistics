@@ -1,0 +1,190 @@
+package com.zt.hackman.model;
+
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Build;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.ForgetPwdActivity;
+import com.zt.hackman.activity.MainActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.event.RefreshEvent;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.PreferencesUtils;
+import com.zt.hackman.utils.StringUtils;
+import com.zt.hackman.utils.ToastUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.simple.eventbus.EventBus;
+
+/**
+ * Created by Administrator on 2016/9/13.
+ */
+public class LoginModel implements View.OnClickListener{
+    public TextView rightClick,loginBtn,showText,forgetBtn;
+    public EditText loginPwdEdit,loginIdEdit;
+    public ImageView leftClick;
+    private Activity ac;
+    Animation animation;
+    //判断图片是否在旋转中，0为旋转，1为非旋转
+    private int isRotate;
+    //0为密码状态，1为非密码状态
+    private int current = 0;
+
+    HackRequest userRequest = new HackRequest();
+    private int loginState; //0为正常登陆,1为提示登陆
+
+    public void findViewByIds(Activity ac,int loginState){
+        this.ac = ac;
+        loginIdEdit = (EditText)ac.findViewById(R.id.login_id_text);
+        loginPwdEdit = (EditText)ac.findViewById(R.id.login_pwd_text);
+        showText = (TextView)ac.findViewById(R.id.show_pwd_btn);
+        loginBtn = (TextView)ac.findViewById(R.id.login_btn);
+        animation = AnimationUtils.loadAnimation(ac,R.anim.rotate_anim);
+
+        leftClick = (ImageView)ac.findViewById(R.id.left_img);
+        rightClick = (TextView)ac.findViewById(R.id.right_btn);
+
+        leftClick.setOnClickListener(this);
+        loginBtn.setOnClickListener(this);
+        showText.setOnClickListener(this);
+        leftClick.setOnClickListener(this);
+        rightClick.setOnClickListener(this);
+    }
+    /**
+     * 请求回调
+     */
+    StringCallback callBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            clearAnim();
+            Toast.makeText(ac, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onResponse(String response) {
+            //System.out.println();
+            Response res = new Response(response,ac);
+            clearAnim();
+            if(res.code>1) {
+                try {
+                    JSONObject jsonObject = new JSONObject(res.data);
+                    String sid =  jsonObject.getString("sid");
+                    PreferencesUtils.putString(ac, Constant.PREFERENCE_KEY.KEY_SID,sid);
+                    ToastUtils.showSuccess(ac,"登录成功");
+                    switch (loginState){
+                        case 0:
+                            Intent intent = new Intent(ac, MainActivity.class);
+                            ac.startActivity(intent);
+                            ac.finish();
+                            break;
+                        case 1:
+                            ac.finish();
+                            EventBus.getDefault().post(new RefreshEvent(RefreshEvent.TYPE_LOGIN_REFRESH));
+                            break;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ac,"JSON转换异常",Toast.LENGTH_SHORT).show();
+                }
+
+            }else{
+                Toast.makeText(ac,res.msg,Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+    private void login() throws JSONException {
+        String loginId = loginIdEdit.getText().toString();
+        String loginPwd = loginPwdEdit.getText().toString();
+        if(loginId ==null|| StringUtils.isEmpty(loginId)){
+            Toast.makeText(ac,"请输入用户名",Toast.LENGTH_SHORT).show();
+            clearAnim();
+            return;
+        }
+        else if(loginId ==null|| StringUtils.isEmpty(loginPwd)){
+            Toast.makeText(ac,"请输入密码",Toast.LENGTH_SHORT).show();
+            clearAnim();
+            return;
+        }
+        else{
+            JSONObject object =  new JSONObject();
+            object.put("command","login");
+            object.put("tel",loginId);
+            object.put("password",loginPwd);
+
+            userRequest.request(object.toString(),callBack, Constant.TEST_HOST);
+        }
+    }
+
+    public void clear(){
+        loginPwdEdit = null;
+        loginIdEdit = null;
+        rightClick = null;
+        leftClick = null;
+        loginBtn = null;
+        showText = null;
+        forgetBtn = null;
+        animation = null;
+    }
+
+    /**
+     * 清除登录按钮的动画
+     */
+    private void clearAnim(){
+        loginBtn.clearAnimation();
+        loginBtn.setBackgroundResource(R.mipmap.login_btn);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch(v.getId()){
+            case R.id.login_btn:
+                loginBtn.setBackgroundResource(R.mipmap.logining);
+
+                loginBtn.startAnimation(animation);
+
+                try {
+                    login();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ac, "登录失败", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            case R.id.show_pwd_btn:
+                if(current==0){  //密码状态改为非密码状态
+                    loginPwdEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    current =1;
+                    showText.setText("隐藏");
+                }else if(current ==1){  //非密码状态改为密码状态
+                   loginPwdEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    current = 0;
+                    showText.setText("显示");
+                }
+                break;
+            case R.id.left_img:
+                ac.finish();
+                break;
+            case R.id.right_btn:
+                ac. startActivity(new Intent(ac,ForgetPwdActivity.class));
+                break;
+
+        }
+    }
+}

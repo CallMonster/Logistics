@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <ImageView android:layout_centerVertical="true"
+        android:layout_width="96dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:background="@mipmap/default_image"
+        android:id="@+id/news_img"
+        />
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/news_img">
+        <TextView android:text="正统物流招募司机"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/colorBlack"/>
+
+        <TextView android:textSize="@dimen/font_12"
+            android:text="任职要求:我们还想要一个"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_grey"
+            android:layout_marginTop="@dimen/space_15"/>
+        <TextView android:textSize="@dimen/font_12"
+            android:text="最少还想要一个"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/home_grey"
+            android:layout_marginTop="@dimen/space_8"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/space_15"
+        android:layout_height="@dimen/space_20"
+        android:src="@mipmap/derection_icon"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+</RelativeLayout>

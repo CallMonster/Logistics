@@ -1,0 +1,14 @@
+package com.zt.hackman.model;
+
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class RegisterModel {
+    public TextView showBtn,getNumBtn,registerBtn,rightBtn;
+    public ImageView leftBtn;
+    public EditText phoneText,pwdText,numText;
+}

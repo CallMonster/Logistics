@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">政通物流</string>
+
+    <string name="home_title">您好，欢迎使用政通物流~</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="home_bottom">点击查看隐私条款和使用条款》</string>
+    <string name="login_title">用户登录</string>
+    <string name="login_id">手机号码</string>
+    <string name="login_pwd">密码</string>
+    <string name="forget_pwd">忘记密码</string>
+    <string name="validNum">验证码</string>
+    <string name="getNum">获取验证码</string>
+    <string name="set_new_pwd">设置新密码</string>
+
+    <string name="home">首页</string>
+    <string name="order">订单任务</string>
+    <string name="my">我的</string>
+    <string name="about_us">天津市正通物流配送有限公司（简称正通物流公司）是天津市交通集团公司全资子公司，是按照现代企业制度组建的以从事城市物流配送服务为主的第三方物流企业。具有完善规范的管理体系，运转高效的经营机制，优质良好的服务功能，以现代物流理念引领企业的发展。
+公司主要经营项目为：商品物流配送、国内货运代理、公路货物运输、货物储存、劳务服务（搬倒装卸）、货物分类、包装服务、物流信息咨询服务等。公司下设若干个分公司和企业，其中路通大型物件运输服务有限公司、交通青年实业公司、交通石油公司系法人企业，主要从事普通货运、集装箱运输、大件运输、道路运输服务、货运代理、仓储、理货、起重搬倒、装卸、物流信息咨询服务、道路运输辅助服务、机电设备租赁、成品油销售等。
+公司标有正通物流标识的微型厢式配送车辆遍布于全市主要商贸集散地、穿梭于城市的大街小巷，以“小、快、灵”的优势为客户提供即时、便捷的配送全程服务。
+公司拥有一批精通物流运作的专业人才，可为客户设计提供个性化的物流服务方案，并按照统一的流程和标准进行业务运作。
+公司拥有数百部以轻卡厢货、微型厢货为统一标准配置的专用配送车辆，采用先进的通讯、调度监控系统，可满足不同客户多样化、个性化的需求。4006-561-569公众客服热线及公司网站(www.tjztwl.com)，可进行即时信息交换，为客户和物流企业提供信息服务。
+公司以市场需求为导向、以用户满意为目标。可为客户提供门到门全过程、全方位、高水平、高质量的物流配送服务。</string>
+</resources>

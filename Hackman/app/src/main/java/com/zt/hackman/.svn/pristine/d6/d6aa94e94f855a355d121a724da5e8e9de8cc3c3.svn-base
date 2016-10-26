@@ -1,0 +1,172 @@
+package com.zt.hackman.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
+
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.bean.ImageItem;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.zt.hackman.R;
+import com.zt.hackman.adapter.ChoosePhotoAdapter;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.event.CauseEvent;
+import com.zt.hackman.event.ChooseImageEvent;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+import com.zt.hackman.loader.PicassoImageLoader;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.model.QuestionModel;
+import com.zt.hackman.response.QuestionResponse;
+import com.zt.hackman.view.ChooseCauseWindow;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subcriber;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class HappenQuestionReceiverActivity extends BaseActivity implements LeftListener,RightListener,View.OnClickListener{
+    NavModel navModel;
+    QuestionModel model;
+
+    private ChoosePhotoAdapter adapter;
+    private List<ImageItem> items;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+        setContentView(R.layout.activity_question);
+        initNavBar();
+        findViewByIds();
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(this);
+        navModel.setLeftListener(this);
+        navModel.setRightListener(this);
+        navModel.setLeftBtn(R.mipmap.main_back);
+        navModel.setTitle("送货遇到问题");
+        navModel.setRightBtn("联系客服");
+
+    }
+
+    @Override
+    protected void findViewByIds() {
+        model = new QuestionModel() ;
+        model.findViewByIds(this,this);
+    }
+
+    @Override
+    protected void initView() {
+        model.questionNav.setBackgroundResource(R.color.colorWhite);
+
+        adapter  = new ChoosePhotoAdapter(this);
+        model.gridView.setAdapter(adapter);
+        items = new ArrayList<ImageItem>();
+        items.add(new ImageItem());
+        adapter.refreshData(items);
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void leftClick() {
+        finish();
+    }
+
+    @Override
+    public void rightClick() {
+
+    }
+
+    @Subcriber
+    public void onEventMain(ChooseImageEvent event){
+        if(event.type == ChooseImageEvent.TYPE_CHOOSE_IMAGE){
+            chooseImg();
+        }
+    }
+
+    @Subcriber
+    public void onEventMain(CauseEvent event){
+        if(event.type == CauseEvent.TYPE_CAUSE_POSITION){
+
+        }
+    }
+
+    public void chooseImg(){
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
+        imagePicker.setShowCamera(true);  //显示拍照按钮
+        imagePicker.setCrop(false);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setSelectLimit(10);    //选中数量限制
+        //imagePicker.setStyle(CropImageView.Style.RECTANGLE);  //裁剪框的形状
+//        imagePicker.setFocusWidth(800);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+//        imagePicker.setFocusHeight(800);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+//        imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
+//        imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
+
+        Intent intent = new Intent(this, ImageGridActivity.class);
+        startActivityForResult(intent, Constant.INTNENTS.IMAGE_PICKER);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
+            if (data != null && requestCode == Constant.INTNENTS.IMAGE_PICKER) {
+                Toast.makeText(this, "数据已经回来了", Toast.LENGTH_SHORT).show();
+                items = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
+                if(items.size()<10){
+                    items.add(new ImageItem());
+                }
+                adapter.refreshData(items);
+            } else {
+                Toast.makeText(this, "没有数据", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.choose_question_layout:
+                List<QuestionResponse.Cause> causes = new ArrayList<QuestionResponse.Cause>();
+                QuestionResponse.Cause cause1 =  new QuestionResponse.Cause();
+                cause1.name = "货物破损";
+                QuestionResponse.Cause cause2 =  new QuestionResponse.Cause();
+                cause2.name = "货物破损";
+                QuestionResponse.Cause cause3 =  new QuestionResponse.Cause();
+                cause3.name = "货物破损";
+                QuestionResponse.Cause cause4 =  new QuestionResponse.Cause();
+                cause4.name = "货物破损";
+                causes.add(cause1);
+                causes.add(cause2);
+                causes.add(cause3);
+                causes.add(cause4);
+                ChooseCauseWindow window = new ChooseCauseWindow(this,causes);
+                window.showAtLocation(v, Gravity.BOTTOM,0,0);
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+}

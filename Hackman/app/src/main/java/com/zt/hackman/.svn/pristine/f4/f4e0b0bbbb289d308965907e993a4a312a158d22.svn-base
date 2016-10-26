@@ -1,0 +1,167 @@
+package com.zt.hackman.model;
+
+import android.content.Intent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.lzy.imagepicker.ImagePicker;
+import com.lzy.imagepicker.ui.ImageGridActivity;
+import com.lzy.imagepicker.view.CropImageView;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.ApproveStateActivity;
+import com.zt.hackman.activity.UpdateAddressActvitiy;
+import com.zt.hackman.activity.UpdateNameActivity;
+import com.zt.hackman.activity.UpdatePhoneActivity;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.loader.PicassoImageLoader;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.HackmanResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.ToastUtils;
+import com.zt.hackman.view.AlertLoadingDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.ArrayList;
+
+/**
+ * Created by Administrator on 2016/9/27.
+ */
+public class PersonalCenterModel implements View.OnClickListener{
+    public RelativeLayout userHeadLayout,userNameLayout,
+            userPhoneLayout,userSecondPhoneLayout,
+            userAddressLayout,userNav,userStateLayout;
+    public ImageView userImage,userStateImage;
+    public TextView userNameText,userPhoneText
+            ,userSecondPhoneText,userAddressText,userStateText;
+
+    private BaseActivity ac;
+    AlertLoadingDialog dialog;
+
+    StringCallback uploadCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            dialog.dismiss();
+
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Response res = new Response(response,ac);
+            dialog.dismiss();
+            if(res.code>0){
+                ToastUtils.showSuccess(ac,res.msg);
+            }else{
+                Toast.makeText(ac,"上传头像失败",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
+
+
+    /**
+     * 上传
+     * @param face
+     */
+    public  void uplaod(File face){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","upServerHeadPic");
+            jsonObject.put("sid","1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(ac,"JSON数据转换异常",Toast.LENGTH_SHORT).show();
+        }
+
+
+        HackmanResponse.FileParams params = new HackmanResponse.FileParams();
+        params.name = "face";
+        params.file = face;
+        ArrayList<HackmanResponse.FileParams> fileParamses = new ArrayList<HackmanResponse.FileParams>();
+        fileParamses.add(params);
+        dialog = ToastUtils.showLoading(ac,"头像上传中...");
+        new HackRequest().requestFileAndParams(jsonObject.toString(),fileParamses
+                ,Constant.TEST_HOST,uploadCallBack);
+
+    }
+
+    public void findViewByIds(BaseActivity activity){
+        this.ac = activity;
+        userHeadLayout = (RelativeLayout)activity.findViewById(R.id.user_head_layout);
+        userNameLayout = (RelativeLayout)activity.findViewById(R.id.user_name_layout);
+        userPhoneLayout = (RelativeLayout)activity.findViewById(R.id.user_phone_layout);
+        userSecondPhoneLayout = (RelativeLayout)activity.findViewById(R.id.user_second_phone_layout);
+        userAddressLayout = (RelativeLayout)activity.findViewById(R.id.user_address_layout);
+        userNameText = (TextView)activity.findViewById(R.id.user_name_text);
+        userPhoneText = (TextView)activity.findViewById(R.id.user_phone_text);
+        userSecondPhoneText = (TextView)activity.findViewById(R.id.user_second_phone_text);
+        userAddressText = (TextView)activity.findViewById(R.id.user_address_text);
+        userStateText = (TextView)activity.findViewById(R.id.user_state_text);
+        userImage = (ImageView)activity.findViewById(R.id.user_head_img);
+        userStateImage = (ImageView)activity.findViewById(R.id.user_state_img);
+        userStateLayout = (RelativeLayout) activity.findViewById(R.id.hackman_state_layout);
+
+        userNav = (RelativeLayout)activity.findViewById(R.id.personal_center_activity_nav);
+        userNav.setBackgroundResource(R.color.colorWhite);
+
+        userHeadLayout.setOnClickListener(this);
+        userNameLayout.setOnClickListener(this);
+        userPhoneLayout.setOnClickListener(this);
+        userSecondPhoneLayout.setOnClickListener(this);
+        userAddressLayout.setOnClickListener(this);
+        userStateLayout.setOnClickListener(this);
+    }
+
+
+    private void chooseImg(){
+        ImagePicker imagePicker = ImagePicker.getInstance();
+        imagePicker.setImageLoader(new PicassoImageLoader());   //设置图片加载器
+        imagePicker.setShowCamera(true);  //显示拍照按钮
+        imagePicker.setCrop(false);        //允许裁剪（单选才有效）
+        imagePicker.setSaveRectangle(true); //是否按矩形区域保存
+        imagePicker.setSelectLimit(1);    //选中数量限制
+        imagePicker.setStyle(CropImageView.Style.CIRCLE);  //裁剪框的形状
+        imagePicker.setFocusWidth(80);   //裁剪框的宽度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setFocusHeight(80);  //裁剪框的高度。单位像素（圆形自动取宽高最小值）
+        imagePicker.setOutPutX(100);//保存文件的宽度。单位像素
+        imagePicker.setOutPutY(100);//保存文件的高度。单位像素
+
+        Intent intent = new Intent(ac, ImageGridActivity.class);
+        ac.startActivityForResult(intent, Constant.INTNENTS.IMAGE_PICKER);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.user_head_layout:
+                chooseImg();
+                break;
+
+            case R.id.user_name_layout:
+                ac.startActivity(UpdateNameActivity.class);
+                break;
+
+            case R.id.user_address_layout:
+                ac.startActivity(UpdateAddressActvitiy.class);
+                break;
+            case R.id.user_phone_layout:
+
+                break;
+
+            case R.id.user_second_phone_layout:
+                ac.startActivity(UpdatePhoneActivity.class);
+                break;
+
+            case R.id.hackman_state_layout:
+                ac.startActivity(ApproveStateActivity.class);
+                break;
+        }
+    }
+}

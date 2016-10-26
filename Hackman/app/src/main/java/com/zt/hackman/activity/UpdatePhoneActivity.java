@@ -1,0 +1,72 @@
+package com.zt.hackman.activity;
+
+import android.os.Bundle;
+import android.view.KeyEvent;
+
+import com.zt.hackman.R;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.model.NavModel;
+import com.zt.hackman.model.UpdateNameModel;
+import com.zt.hackman.model.UpdateSecondPhoneModel;
+
+/**
+ * Created by Administrator on 2016/9/27.
+ */
+public class UpdatePhoneActivity extends BaseActivity implements LeftListener{
+
+    NavModel navModel;
+    UpdateSecondPhoneModel model;
+    Bundle bundle = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        bundle = getIntent().getExtras();
+        setContentView(R.layout.activity_update_second_phone);
+        initNavBar();
+        findViewByIds();
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void initNavBar() {
+        navModel = new NavModel(this);
+        navModel.setLeftListener(this);
+        navModel.setLeftBtn(R.mipmap.main_back);
+        navModel.setTitle("修改紧急联系人");
+    }
+
+    @Override
+    protected void findViewByIds() {
+        model = new UpdateSecondPhoneModel();
+        if(bundle!=null) {
+            model.findViewByIds(this,bundle.getString("econtact",null),bundle.getString("econtactTel",null));
+        }
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public void leftClick() {
+        onBackPressed();
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if(event.getKeyCode() == KeyEvent.KEYCODE_ENTER){
+            model.updatePhone();
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../PicassoLib/PicassoLib.iml" filepath="$PROJECT_DIR$/../PicassoLib/PicassoLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ViewDemo.iml" filepath="$PROJECT_DIR$/../ViewDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../app/app.iml" filepath="$PROJECT_DIR$/../app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../autolayoutLib/autolayoutLib.iml" filepath="$PROJECT_DIR$/../autolayoutLib/autolayoutLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/convenientbanner.iml" filepath="$PROJECT_DIR$/convenientbanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../delListLib/delListLib.iml" filepath="$PROJECT_DIR$/../delListLib/delListLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../passLib/passLib.iml" filepath="$PROJECT_DIR$/../passLib/passLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../selectphotoLib/selectphotoLib.iml" filepath="$PROJECT_DIR$/../selectphotoLib/selectphotoLib.iml" />
+    </modules>
+  </component>
+</project>

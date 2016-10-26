@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@mipmap/black_bg"
+    android:fitsSystemWindows="false">
+    <include layout="@layout/login_nav"
+        android:id="@+id/login_nav_layout"/>
+    <LinearLayout android:layout_below="@+id/login_nav_layout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_18"
+            android:textColor="@color/colorWhite"
+            android:text="@string/login_title"
+            android:layout_marginTop="12dp"/>
+        <TextView style="@style/login_text"
+            android:text="@string/login_id"
+            android:layout_marginTop="15dp"/>
+        <EditText style="@style/login_edit"
+            android:hint="仅为数字"
+            android:id="@+id/login_id_text"
+            android:layout_marginTop="6dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@mipmap/login_line"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+            <TextView style="@style/login_text"
+                android:text="@string/login_pwd"/>
+            <TextView android:layout_alignParentRight="true"
+                style="@style/login_text"
+                android:id="@+id/show_pwd_btn"
+                android:text="显示"/>
+        </RelativeLayout>
+
+        <EditText style="@style/login_edit"
+            android:hint="密码不得少于6位"
+            android:id="@+id/login_pwd_text"
+            android:inputType="textPassword"
+            android:layout_marginTop="6dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="@mipmap/login_line"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/space_10"/>
+        <TextView android:id="@+id/login_btn"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@mipmap/login_btn"
+            android:layout_marginTop="@dimen/space_20"
+            android:layout_gravity="right"/>
+    </LinearLayout>
+</RelativeLayout>

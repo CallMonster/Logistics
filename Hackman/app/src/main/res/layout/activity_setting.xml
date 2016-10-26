@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/grey_low">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/setting_nav_layout"/>
+        <RelativeLayout android:id="@+id/setting_update_phone_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_44"
+            android:background="@drawable/view_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="修改绑定手机号"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+            <ImageView android:id="@+id/label34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/derection_icon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                />
+            <TextView android:layout_toLeftOf="@id/label34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="123921809380"
+                android:textSize="@dimen/font_12"
+                android:layout_marginRight="@dimen/space_8"
+                android:textColor="@color/home_grey"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_marginTop="@dimen/space_1"
+            android:id="@+id/setting_update_pwd_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_44"
+            android:background="@drawable/view_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="修改密码"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/derection_icon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_marginTop="@dimen/space_1"
+            android:id="@+id/setting_meesage_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_44"
+            android:background="@drawable/view_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="新消息通知"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+            <ImageView android:id="@+id/setting_switch_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:button="@mipmap/switch_icon"
+                android:background="@null"
+                android:src="@mipmap/switch_icon"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout android:layout_marginTop="@dimen/space_1"
+            android:id="@+id/setting_check_update_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_44"
+            android:background="@drawable/view_selector">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="检查更新"
+                android:textColor="@color/grey_normal"
+                android:textSize="@dimen/font_12"
+                android:layout_marginTop="@dimen/space_5"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/derection_icon"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                />
+
+        </RelativeLayout>
+        
+        
+        <TextView android:id="@+id/setting_loginout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/view_selector"
+            android:text="退出"
+            android:gravity="center"
+            android:textSize="@dimen/font_12"
+            android:textColor="@color/colorAccent"
+            />
+    </LinearLayout>
+
+</LinearLayout>

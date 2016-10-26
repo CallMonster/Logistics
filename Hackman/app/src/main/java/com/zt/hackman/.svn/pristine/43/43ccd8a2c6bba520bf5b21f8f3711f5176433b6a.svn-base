@@ -1,0 +1,15 @@
+package com.zt.hackman.event;
+
+/**
+ * Created by Administrator on 2016/9/27.
+ */
+public class RefreshEvent  {
+
+    public static final int TYPE_REFRESH_PERSONAL_CENTER_ACTIVITY = 2000;
+
+    public int type;
+
+    public RefreshEvent(int type){
+        this.type = type;
+    }
+}

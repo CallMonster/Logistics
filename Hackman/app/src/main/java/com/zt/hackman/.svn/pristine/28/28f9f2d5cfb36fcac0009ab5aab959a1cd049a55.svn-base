@@ -1,0 +1,31 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.amap.api.maps2d.MapView;
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class OrderDetailReceiverModel {
+    public RelativeLayout orderDetailNav;
+    public TextView happenQuestionBtn,completeBtn;
+    public MapView mapView;
+
+    public void findViewByIds(Activity activity, View.OnClickListener listener){
+        orderDetailNav = (RelativeLayout)activity.findViewById(R.id.order_detail_receiver_title);
+        happenQuestionBtn = (TextView)activity.findViewById(R.id.happen_question_receiver_btn);
+        completeBtn = (TextView)activity.findViewById(R.id.confirm_complete_receiver_btn);
+        orderDetailNav.setBackgroundResource(R.color.colorWhite);
+        mapView  = (MapView)activity. findViewById(R.id.orderDetailReceiverMap);
+
+        completeBtn.setOnClickListener(listener);
+        happenQuestionBtn.setOnClickListener(listener);
+    }
+
+
+}

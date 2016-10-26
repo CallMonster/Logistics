@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/nav_layout"
+        android:id="@+id/fragment_home_nav"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grey_low">
+
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:layout_width="match_parent"
+                android:layout_height="111dp"
+                android:id="@+id/home_banner"
+                app:canLoop="true"
+                android:background="@color/colorWhite"/>
+            <GridView android:layout_height="wrap_content"
+                android:id="@+id/recommendGridView"
+                android:layout_width="match_parent"
+                android:horizontalSpacing="@dimen/space_2"
+                android:numColumns="2"
+                android:layout_marginTop="@dimen/space_1"
+                android:background="@color/grey_low"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_1"
+                android:background="@color/colorGrey"/>
+            <ListView android:id="@+id/recommendListView"
+                android:layout_width="match_parent"
+                android:scrollbars="none"
+                android:dividerHeight="0dp"
+                android:divider="@null"
+                android:layout_height="42dp"
+                android:background="@color/colorWhite"/>
+
+
+            <RelativeLayout android:background="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="@dimen/space_8">
+            <TextView android:text="最新资讯"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:layout_width="match_parent"
+                android:layout_centerVertical="true"
+                android:textColor="@color/home_grey"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_12"
+                />
+                <TextView android:textSize="@dimen/font_14"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="更多"
+                    android:textColor="@color/tab_seleted"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:id="@+id/more_news_btn"/>
+            </RelativeLayout>
+            <ListView android:scrollbarStyle="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:id="@+id/newsListView"
+                android:background="@color/colorWhite"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

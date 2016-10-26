@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/drak_transparent">
+    <LinearLayout android:orientation="vertical"
+        android:layout_weight="1"
+        android:background="@color/grey_low"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/nav_layout"
+            android:id="@+id/address_nav_layout"/>
+        
+        <RelativeLayout android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:id="@+id/choose_area_layout"
+            android:layout_marginTop="@dimen/space_5">
+            <TextView android:textSize="@dimen/font_14"
+                android:textColor="@color/wheel_selected_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="选择地址"
+                android:id="@+id/label30"/>
+
+            <TextView android:textSize="@dimen/font_12"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_toRightOf="@id/label30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/area_text"
+                android:textColor="@color/home_grey"/>
+            <ImageView android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/derection_icon"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/colorWhite">
+            <TextView android:textSize="@dimen/font_14"
+                android:textColor="@color/wheel_selected_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_15"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="详细地址"
+                android:id="@+id/label31"/>
+            <EditText android:id="@+id/address_content_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="请输入详细地址"
+                android:layout_toRightOf="@id/label31"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginTop="@dimen/space_15"
+                android:textSize="@dimen/font_12"
+                android:textColor="@color/home_grey"
+                android:layout_marginBottom="@dimen/space_15"
+                android:inputType="textMultiLine"
+                android:gravity="left"/>
+        </RelativeLayout>
+
+        <RelativeLayout android:background="@color/colorWhite"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginTop="@dimen/space_1">
+            <TextView android:textSize="@dimen/font_14"
+                android:textColor="@color/wheel_selected_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:text="邮政编码"
+                android:id="@+id/label32"/>
+
+            <EditText android:textSize="@dimen/font_12"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_toRightOf="@id/label32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/address_code"
+                android:hint="请输入所在区域的邮政编码"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:textColor="@color/home_grey"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+    
+    <TextView android:id="@+id/update_address_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="保存"
+        android:gravity="center"
+        android:background="@color/tab_seleted"
+        android:textColor="@color/colorWhite"/>
+</LinearLayout>

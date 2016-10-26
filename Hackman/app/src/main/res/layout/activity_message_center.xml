@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/drak_transparent"
+    android:fitsSystemWindows="true">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/message_center_nav"/>
+    <com.zt.hackman.base.widget.ProgressActivity
+        android:id="@+id/message_list_progressActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:emptyBackgroundColor="@color/grey_low"
+        app:errorBackgroundColor="@color/grey_low"
+        app:loadingBackgroundColor="@color/grey_low"
+        app:emptyImageHeight="52dp"
+        app:emptyImageWidth="54dp"
+        app:loadingProgressBarHeight="48dp"
+        app:loadingProgressBarWidth="48dp"
+        app:errorImageHeight="52dp"
+        app:errorImageWidth="54dp">
+        <include layout="@layout/fragment_my_order"
+            android:id="@+id/message_center_content"/>
+    </com.zt.hackman.base.widget.ProgressActivity>
+</LinearLayout>

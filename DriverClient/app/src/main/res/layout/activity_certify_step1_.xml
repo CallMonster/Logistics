@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@color/background_white"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/nameEdit"
+        android:background="#ababab" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:cacheColorHint="#00000000"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--tip1-->
+            <TextView
+                android:id="@+id/tip1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:text="真实姓名"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tip1end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/tip1"
+                android:text="(必填)"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/nameEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tip1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/tip1Line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/nameEdit"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="#ababab" />
+
+            <!--tip2-->
+            <TextView
+                android:id="@+id/tip2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tip1Line"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="身份证号码"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tip2end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tip2"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tip2"
+                android:text="(必填)"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/idEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tip2"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:digits="1234567890xX"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/tip2Line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/idEdit"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="#ababab" />
+
+            <!--tip3-->
+            <TextView
+                android:id="@+id/tip3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tip2Line"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="上传身份证正反面照片"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tip3end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tip3"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tip3"
+                android:text="(必填)"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp" />
+
+            <!--身份证正面-->
+            <LinearLayout
+                android:id="@+id/positiveLayout"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/tip3"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:background="#abc6c6c6"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/positivePic"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/p_pic"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/add_photo" />
+
+                <TextView
+                    android:id="@+id/p_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="正面"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <!--身份证反面-->
+            <LinearLayout
+                android:id="@+id/negativeLayout"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/tip3"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/positiveLayout"
+                android:background="#abc6c6c6"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/negativePic"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/n_pic"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/add_photo" />
+
+                <TextView
+                    android:id="@+id/n_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="反面"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tip4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/positiveLayout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="上传驾驶证照片"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tip4end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tip4"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tip4"
+                android:text="(必填)"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/driverLayout"
+                android:layout_below="@+id/tip4"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/addDriverBtn"
+                    android:layout_width="100dp"
+                    android:layout_height="70dp"
+                    android:background="#abc6c6c6"
+                    android:scaleType="center"
+                    android:src="@mipmap/add_photo" />
+
+                <ImageView
+                    android:id="@+id/addOtherDriverBtn"
+                    android:layout_width="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_height="70dp"
+                    android:background="#abc6c6c6"
+                    android:scaleType="center"
+                    android:src="@mipmap/add_photo" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tip5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driverLayout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="企业编号（可选）"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/companyIdEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tip5"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="5dp"
+                android:background="@null"
+                android:inputType="number"
+                android:maxLines="1"
+                android:padding="5dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:id="@+id/tip5Line"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_below="@+id/companyIdEdit"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="#ababab" />
+
+            <TextView
+                android:id="@+id/tip6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tip5Line"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="上传从业资格证照片(可选)"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/addCompanyBtn"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/tip6"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:background="#abc6c6c6"
+                android:scaleType="center"
+                android:src="@mipmap/add_photo" />
+        </RelativeLayout>
+    </ScrollView>
+
+
+</LinearLayout>

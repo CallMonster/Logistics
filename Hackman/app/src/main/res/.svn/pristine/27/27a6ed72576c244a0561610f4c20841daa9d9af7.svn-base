@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/drak_transparent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/window_root_view"
+    tools:context=".activity.AddBankTwoActivity">
+    <RelativeLayout android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@color/colorWhite">
+        <RelativeLayout android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:id="@+id/label20"
+            >
+            <TextView android:textSize="@dimen/font_14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:layout_marginLeft="12dp"
+                android:textColor="@color/tab_normal"
+                android:layout_centerVertical="true"
+                android:id="@+id/window_card_cancel_btn"/>
+
+            <TextView android:textSize="@dimen/font_14"
+                android:id="@+id/window_card_confirm_btn"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="确定"
+                android:layout_marginRight="12dp"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/tab_seleted"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+        <LinearLayout android:layout_marginTop="@dimen/space_8"
+            android:layout_width="match_parent"
+            android:layout_below="@id/label20"
+            android:layout_height="match_parent">
+            <com.zt.hackman.view.WheelView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@color/colorWhite"
+                app:unitHight="44dp"
+                android:id="@+id/bank_type_wheel"/>
+            <com.zt.hackman.view.WheelView
+                android:layout_marginLeft="@dimen/space_3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                app:unitHight="44dp"
+                android:background="@color/colorWhite"
+                android:id="@+id/card_type_wheel"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

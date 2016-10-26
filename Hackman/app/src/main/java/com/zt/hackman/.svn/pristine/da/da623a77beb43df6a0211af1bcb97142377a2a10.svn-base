@@ -1,0 +1,37 @@
+package com.zt.hackman.response;
+
+/**
+ * Created by Administrator on 2016/9/14.
+ */
+public class HomeResponse {
+    /**
+     * 推送信息类
+     */
+    public static class Movement{
+        public Movement(){
+
+        }
+        public int level;        //等级
+        public int headportrait; //头像
+        public String name;
+        public String reason;
+        public String comment;
+    }
+
+    public static class News{
+        public News(){
+
+        }
+        public int img;
+        public String title;
+        public String requirement_one;
+        public String requirement_two;
+    }
+
+    public static class RecommendInfo{
+        //红还是蓝0,1
+        public int flag;
+        public String msg;
+    }
+
+}

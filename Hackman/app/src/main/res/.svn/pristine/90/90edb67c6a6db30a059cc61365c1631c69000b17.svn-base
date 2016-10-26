@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
+    android:background="@color/tab_seleted"
+    android:paddingTop="24dp">
+    <include
+        layout="@layout/nav_layout"
+        android:id="@+id/my_wallet_nav"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_100">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="可结算余额"
+            android:textColor="@color/colorGrey"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/space_15"
+            android:id="@+id/my_wallet_label"
+            android:textSize="@dimen/font_14"/>
+        <TextView android:textSize="@dimen/font_18"
+            android:id="@+id/my_wallet_nums_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="887888"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_20"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_44"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未结算金额:"
+            android:textColor="@color/colorGrey"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:id="@+id/nolabel"
+            android:textSize="@dimen/font_14"/>
+        <TextView android:id="@+id/my_wallet_no_nums_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/colorWhite"
+            android:text="￥11111"
+            android:layout_toRightOf="@id/nolabel"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_8"/>
+    </RelativeLayout>
+    
+    <RelativeLayout android:id="@+id/withdraw_deposit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/view_selector">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/list_my_wallet"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_centerVertical="true"
+            android:id="@+id/my_wallet_icon_label" />
+        <TextView android:layout_toRightOf="@id/my_wallet_icon_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/colorBlack"
+            android:text="提现"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/space_5"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/derection_icon"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_5"
+        android:background="@color/colorGrey"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/colorWhite"
+        android:text="我的流水"
+        android:textColor="@color/colorBlack"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:gravity="center_vertical"/>
+    <ListView android:id="@+id/my_wallet_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        >
+
+    </ListView>
+</LinearLayout>

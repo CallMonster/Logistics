@@ -1,0 +1,32 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.amap.api.maps2d.MapView;
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class OrderDetailClaimModel {
+    public RelativeLayout orderDetailNav;
+    public TextView happenQuestionBtn,completeBtn;
+    public MapView mapView;
+
+    public void findViewByIds(Activity activity, View.OnClickListener listener){
+        orderDetailNav = (RelativeLayout)activity.findViewById(R.id.order_detail_claim_title);
+        happenQuestionBtn = (TextView)activity.findViewById(R.id.claim_happen_question_btn);
+        completeBtn = (TextView)activity.findViewById(R.id.claim_confirm_complete_btn);
+        orderDetailNav.setBackgroundResource(R.color.colorWhite);
+        mapView  = (MapView)activity. findViewById(R.id.orderDetailClaimMap);
+
+        completeBtn.setOnClickListener(listener);
+        happenQuestionBtn.setOnClickListener(listener);
+    }
+
+
+}

@@ -1,0 +1,103 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.listener.LeftListener;
+import com.zt.hackman.listener.RightListener;
+
+/**
+ * 导航栏所有Model
+ */
+public class NavModel implements View.OnClickListener{
+    public TextView titleView,rightBtn;
+    public ImageView leftBtn;
+    public LeftListener leftListener;
+    public RightListener rightListener;
+    public NavModel(View activity){
+        leftBtn = (ImageView) activity.findViewById(R.id.nav_left_btn);
+        rightBtn = (TextView)activity.findViewById(R.id.nav_right_btn);
+        titleView = (TextView)activity.findViewById(R.id.nav_title_text);
+    }
+
+    public NavModel(Activity activity){
+        leftBtn = (ImageView) activity.findViewById(R.id.nav_left_btn);
+        rightBtn = (TextView)activity.findViewById(R.id.nav_right_btn);
+        titleView = (TextView)activity.findViewById(R.id.nav_title_text);
+    }
+
+    /**
+     * 设置左侧按钮监听
+     * @param listener
+     */
+    public void setLeftListener(LeftListener listener){
+        this.leftListener = listener;
+    }
+
+    /**
+     * 设置右侧监听
+     * @param listener
+     */
+    public void setRightListener(RightListener listener){
+        this.rightListener = listener;
+    }
+
+    /**
+     * 设置文字标题
+     * @param title
+     */
+    public void setTitle(String title){
+        titleView.setText(title);
+    }
+
+    /**
+     * 设置图片标题
+     * @param resId
+     */
+    public void setTitle(int resId){
+        titleView.setBackgroundResource(resId);
+    }
+
+    /**
+     * 设置左侧按钮图片
+     * @param resId
+     */
+    public void setLeftBtn(int resId){
+        leftBtn.setBackgroundResource(resId);
+        leftBtn.setOnClickListener(this);
+    }
+
+    /**
+     * 设置右侧按钮的标题
+     * @param title
+     */
+    public void setRightBtn(String title){
+        rightBtn.setText(title);
+        rightBtn.setOnClickListener(this);
+    }
+
+    /**
+     * 设置右侧按钮的图片
+     * @param resId
+     */
+    public void setRightBtn(int resId){
+        rightBtn.setBackgroundResource(resId);
+        rightBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.nav_left_btn:
+                leftListener.leftClick();
+                break;
+            case R.id.nav_right_btn:
+                rightListener.rightClick();
+                break;
+        }
+    }
+
+}

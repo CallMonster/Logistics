@@ -1,0 +1,131 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.ActionDetailsActivity;
+import com.zt.hackman.activity.NewsListActivity;
+import com.zt.hackman.adapter.MovementAdapter;
+import com.zt.hackman.adapter.NewsAdapter;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.response.HomeResponse;
+import com.zt.hackman.utils.DisplayUtil;
+import com.zt.hackman.view.NetworkImageHolderView;
+import com.zt.hackman.viewpagerindicator.CirclePageIndicator;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/14.
+ */
+public class HomeModel implements OnItemClickListener,View.OnClickListener{
+    public RelativeLayout titleBar;
+    public ConvenientBanner banner;
+    public GridView gridView;
+    //public ListView recommendListView;
+
+    public TextView moreNewsBtn;
+    public ListView listView;   //新闻资讯视图
+    public NewsAdapter newsAdapter;
+
+    public Activity activity;
+
+    public void findViewByIds(View view,Activity activity){
+        this.activity = activity;
+        banner = (ConvenientBanner) view.findViewById(R.id.home_banner);
+        gridView = (GridView)view.findViewById(R.id.recommendGridView);
+        //recommendListView = (ListView)view.findViewById(R.id.recommendListView);
+        listView = (ListView)view.findViewById(R.id.newsListView);
+        titleBar = (RelativeLayout)view.findViewById(R.id.fragment_home_nav);
+        moreNewsBtn = (TextView)view.findViewById(R.id.more_news_btn);
+
+
+        titleBar.setBackgroundResource(R.color.colorWhite);
+        moreNewsBtn.setOnClickListener(this);
+    }
+    /**
+     * 初始化banner
+     * @param datas
+     */
+    public void startBanner(List<Integer> datas){
+        banner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, datas)    //设置需要切换的View
+            .setPointViewVisible(true)    //设置指示器是否可见
+            .setPageIndicator(new int[]{R.mipmap.red_point, R.mipmap.blue_point})   //设置指示器圆点
+            .startTurning(5000)     //设置自动切换（同时设置了切换时间间隔）
+            .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT) //设置指示器位置（左、中、右）
+            .setOnItemClickListener(this); //设置点击监听事件
+
+    }
+
+    /**
+     * 初始化新闻资讯
+     * @param newses
+     * @param context
+     */
+    public void initNews(List<HomeResponse.News> newses, Context context){
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dip2px(newses.size()*100));
+        listView.setLayoutParams(params);
+        newsAdapter = new NewsAdapter(context);
+        listView.setAdapter(newsAdapter);
+        newsAdapter.refreshData(newses);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent =new Intent(activity,ActionDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.INTNENTS.INTENT_ACTION_ID,position);
+                intent.putExtras(bundle);
+                activity.startActivity(intent);
+            }
+        });
+    }
+
+    /**
+     * 初始化推送信息
+     */
+    public void initMovement(MovementAdapter adapter){
+        gridView.setAdapter(adapter);
+    }
+
+    public void clear(){
+        banner = null;
+        gridView = null;
+        //recommendListView = null;
+        listView = null;
+    }
+    @Override
+    public void onItemClick(int position) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.more_news_btn:
+                activity.startActivity(new Intent(activity, NewsListActivity.class));
+                break;
+        }
+    }
+}

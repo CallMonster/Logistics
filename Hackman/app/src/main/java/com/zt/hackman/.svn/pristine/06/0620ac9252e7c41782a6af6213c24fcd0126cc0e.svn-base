@@ -1,0 +1,163 @@
+package com.zt.hackman.model;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.reflect.TypeToken;
+import com.squareup.okhttp.Request;
+import com.zhy.http.okhttp.callback.StringCallback;
+import com.zt.hackman.R;
+import com.zt.hackman.activity.OrderDetailClaimActivity;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.base.BaseActivity;
+import com.zt.hackman.base.widget.ProgressActivity;
+import com.zt.hackman.constant.Constant;
+import com.zt.hackman.request.HackRequest;
+import com.zt.hackman.response.MyOrderResponse;
+import com.zt.hackman.response.OrderResponse;
+import com.zt.hackman.response.Response;
+import com.zt.hackman.utils.GsonUtils;
+import com.zt.hackman.utils.LoginUtils;
+import com.zt.hackman.utils.PreferencesUtils;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/23.
+ */
+public class HistoryOrderModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener {
+    public SwipeRefreshLoadMore swipeRefreshLoadMore;
+    public ExpendRecycleView recycleView;
+    public RelativeLayout navLaout;
+    ProgressActivity progressActivity;
+    AbsRVAdapter<OrderResponse> adapter;
+    private BaseActivity ac;
+    List<OrderResponse> datas;
+
+    public void findViewByIds(BaseActivity activity){
+        this.ac =activity;
+        swipeRefreshLoadMore = (SwipeRefreshLoadMore) activity.findViewById(R.id.order_swipe_more);
+        recycleView = (ExpendRecycleView) activity.findViewById(R.id.order_list_view);
+        navLaout = (RelativeLayout)activity.findViewById(R.id.history_order_nav);
+        navLaout.setBackgroundResource(R.color.colorWhite);
+        progressActivity = (ProgressActivity)activity.findViewById(R.id.history_order_list_progressActivity);
+    }
+
+    StringCallback listCallBack = new StringCallback() {
+        @Override
+        public void onError(Request request, Exception e) {
+            progressActivity.showError("网络请求异常", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    initData();
+                }
+            });
+        }
+
+        @Override
+        public void onResponse(String response) {
+            Response res = new Response(response,ac);
+            datas = (List<OrderResponse>) GsonUtils.jsonToList(res.data
+                     ,new TypeToken<List<MyOrderResponse.MyOrder>>(){}.getType());
+            if(res.code>0){
+                if(adapter==null){
+                    adapter = new AbsRVAdapter<OrderResponse>
+                            (recycleView, datas, R.layout.adapter_myorder_claim) {
+
+                        @Override
+                        public void showData(ViewHolder vHolder, final OrderResponse data, int position) {
+                            LinearLayout rootView = (LinearLayout)vHolder.getView(R.id.order_linear_root);
+                            TextView startView = (TextView) vHolder.getView(R.id.adapter_start_text);
+                            TextView endView = (TextView)vHolder.getView(R.id.adapter_end_text);
+                            TextView timeView = (TextView)vHolder.getView(R.id.adapter_claim_time);
+                            timeView.setText(data.createTime);
+                            startView.setText(data.deliverAddr);
+                            endView.setText(data.receiptAddr);
+                            rootView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString(Constant.INTNENTS.INTENT_ORDER_ID,data.id);
+                                    bundle.putInt(Constant.INTNENTS.INTENT_ORDER_STATUS,1);
+                                    ac.startActivity(OrderDetailClaimActivity.class,bundle);
+                                }
+                            });
+
+                            //{"code":"1","data":{"command":"historyOfOrder","orderList":[{"id":"1","orderStatus":"2","deliverAddr":"\u5929\u6d25\u5e023","receiptAddr":"\u5929\u6d25\u5e022","leadTime":""}]},"msg":"\u64cd\u4f5c\u6b63\u5e38"}
+                        }
+
+                    };
+                    recycleView.setAdapter(adapter);
+                }else{
+                    adapter.refreshData(datas);
+                }
+
+            }else{
+                if(res.code==-10){
+                    progressActivity.showError(res.msg,
+                        new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                LoginUtils.toLogin(ac);
+                            }
+                        });
+                }
+            }
+
+        }
+    };
+
+    public void init(){
+        swipeRefreshLoadMore.setColorSchemeColors(new int[]{R.color.colorPrimary, R.color.colorBlack, R.color.colorAccent});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ac);
+        recycleView.setLayoutManager(linearLayoutManager);
+
+        swipeRefreshLoadMore.setOnRefreshListener(this);
+        swipeRefreshLoadMore.setOnLoadListener(this);
+        this.onRefresh();
+        initData();
+    }
+
+    private void initData(){
+        progressActivity.showLoading();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("command","historyOfOrder");
+            String sid = PreferencesUtils.getSID(ac);
+            if(sid==null){
+                LoginUtils.showDialog(ac,"提示登录","你尚未登录,请先登录");
+            }
+            jsonObject.put("sid", sid);
+            jsonObject.put("status","1");
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(ac,"JSON数据转换异常",Toast.LENGTH_SHORT).show();
+        }
+        new HackRequest().request(jsonObject.toString(),listCallBack, Constant.TEST_HOST);
+
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+
+}

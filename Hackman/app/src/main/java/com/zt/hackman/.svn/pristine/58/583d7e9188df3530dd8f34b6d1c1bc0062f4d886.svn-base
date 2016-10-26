@@ -1,0 +1,45 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+import com.zt.hackman.adapter.BankCardAdapter;
+import com.zt.hackman.response.DepositResponse;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/26.
+ */
+public class DepositModel  implements View.OnClickListener {
+
+    public ListView bankListView;
+    public RelativeLayout navDepositLayout;
+    public TextView  depositBtn;
+    public BankCardAdapter adapter;
+    private Activity activity;
+
+    public void findViewByIds(Activity activity){
+        this.activity = activity;
+        bankListView = (ListView)activity.findViewById(R.id.bank_card_list_view);
+        navDepositLayout = (RelativeLayout)activity.findViewById(R.id.deposit_nav_layout);
+        depositBtn = (TextView)activity.findViewById(R.id.deposit_btn);
+        navDepositLayout .setBackgroundResource(R.color.colorWhite);
+        depositBtn.setOnClickListener(this);
+    }
+
+    public void initView(List<DepositResponse.BankCard> cards){
+        adapter = new BankCardAdapter(activity);
+        bankListView.setAdapter(adapter);
+        adapter.refreshData(cards);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+}

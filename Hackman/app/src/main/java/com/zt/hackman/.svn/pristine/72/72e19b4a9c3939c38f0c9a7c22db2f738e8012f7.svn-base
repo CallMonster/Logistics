@@ -1,0 +1,88 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+
+import com.zt.hackman.R;
+import com.zt.hackman.activity.OrderDetailClaimActivity;
+import com.zt.hackman.activity.OrderDetailReciverActivity;
+import com.zt.hackman.adapter.AbsRVAdapter;
+import com.zt.hackman.response.MyOrderResponse;
+import com.zt.hackman.view.ExpendRecycleView;
+import com.zt.hackman.view.SwipeRefreshLoadMore;
+
+import java.util.List;
+
+/**
+ * Created by Administrator on 2016/9/18.
+ */
+public class MyOrderModel implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLoadMore.OnLoadListener{
+    public ExpendRecycleView listView;
+    public SwipeRefreshLoadMore swipeMore;
+    public AbsRVAdapter<MyOrderResponse.MyOrder> adapter;
+
+    public void findViewByIds(View view){
+        listView = (ExpendRecycleView) view.findViewById(R.id.order_list_view);
+        swipeMore = (SwipeRefreshLoadMore)view.findViewById(R.id.order_swipe_more);
+    }
+
+    public void init(final Activity context, List<MyOrderResponse.MyOrder> datas,int orderId){
+        swipeMore.setColorSchemeColors(new int[]{R.color.colorPrimary, R.color.colorBlack, R.color.colorAccent});
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+        listView.setLayoutManager(linearLayoutManager);
+        if(orderId==0){
+            adapter  = new AbsRVAdapter<MyOrderResponse.MyOrder>
+                    (listView, datas, R.layout.adapter_myorder_claim) {
+                @Override
+                public void showData(ViewHolder vHolder, MyOrderResponse.MyOrder data, int position) {
+
+                }
+
+            };
+            adapter.setOnItemClickListener(new AbsRVAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    context.startActivity(new Intent(context, OrderDetailClaimActivity.class));
+                }
+            });
+        }else if(orderId == 1){
+            adapter = new AbsRVAdapter<MyOrderResponse.MyOrder>
+                    (listView, datas, R.layout.adapter_myorder_service) {
+                @Override
+                public void showData(ViewHolder vHolder, MyOrderResponse.MyOrder data, int position) {
+
+                }
+
+            };
+            adapter.setOnItemClickListener(new AbsRVAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    context.startActivity(new Intent(context, OrderDetailReciverActivity.class));
+                }
+            });
+        }else if(orderId==2){
+
+        }
+
+        if(adapter!=null){
+            listView.setAdapter(adapter);
+            swipeMore.setOnRefreshListener(this);
+            swipeMore.setOnLoadListener(this);
+            this.onRefresh();
+        }
+
+    }
+
+    @Override
+    public void onLoadMore() {
+
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+}

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <FrameLayout
+        android:id="@+id/onLineLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rgpBot"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbtn01"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableBottom="@mipmap/ind_selected"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="待取货"
+                    android:textColor="@color/bottom_bg_color"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbtn02"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="待送达"
+                    android:textColor="@color/text_grey"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/rbtn03"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:padding="0dp"
+                    android:text="待结算"
+                    android:textColor="@color/text_grey"
+                    android:textSize="16sp" />
+
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/nameEdit"
+                android:layout_marginTop="5dp"
+                android:alpha="0.3"
+                android:background="#ababab" />
+
+            <FrameLayout
+                android:id="@+id/contain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/background_white" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/cutState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/btn_logout" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/offLineLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <cn.bingoogolapple.qrcode.zxing.ZXingView
+            android:id="@+id/zxingview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:qrcv_barcodeRectHeight="220dp"
+            app:qrcv_borderColor="@android:color/transparent"
+            app:qrcv_borderSize="1dp"
+            app:qrcv_cornerColor="@color/tab_seleted"
+            app:qrcv_cornerLength="20dp"
+            app:qrcv_cornerSize="3dp"
+            app:qrcv_customGridScanLineDrawable="@mipmap/custom_grid_scan_line"
+            app:qrcv_isBarcode="false"
+            app:qrcv_isOnlyDecodeScanBoxArea="true"
+            app:qrcv_isScanLineReverse="true"
+            app:qrcv_isShowDefaultGridScanLineDrawable="true"
+            app:qrcv_isShowDefaultScanLineDrawable="false"
+            app:qrcv_isShowTipBackground="true"
+            app:qrcv_isShowTipTextAsSingleLine="false"
+            app:qrcv_isTipTextBelowRect="false"
+            app:qrcv_maskColor="@color/colorBlack"
+            app:qrcv_scanLineColor="@color/transparent"
+            app:qrcv_scanLineSize="1dp"
+            app:qrcv_tipTextColor="@android:color/white"
+            app:qrcv_tipTextSize="12sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+
+            <TextView
+                android:id="@+id/label46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:text="您还没有扫描二维码"
+                android:textColor="@color/text_grey" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label46"
+                android:layout_centerHorizontal="true"
+                android:text="扫描车上的二维码确认上线"
+                android:textColor="@color/text_grey" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

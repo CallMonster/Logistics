@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_white"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_top" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/nameEdit"
+        android:background="#ababab" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:cacheColorHint="#00000000"
+        android:fadingEdge="none"
+        android:overScrollMode="never"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tip1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/positiveLayout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="请上传您的车辆照片"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tip1end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tip1"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tip1"
+                android:text="(必填)"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/addDriverBtn"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_below="@+id/tip1"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:background="#abc6c6c6"
+                android:scaleType="center"
+                android:src="@mipmap/add_photo" />
+
+            <TextView
+                android:id="@+id/tip2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addDriverBtn"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="请上传您的车辆照片"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tip2end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tip2"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/tip2"
+                android:text="(必填)"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/driverLayout"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_below="@+id/tip2"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
+                android:background="#abc6c6c6"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/positivePic"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/p_pic"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/add_photo" />
+
+                <TextView
+                    android:id="@+id/p_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="正本"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/negativeLayout"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_alignTop="@+id/driverLayout"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/driverLayout"
+                android:background="#abc6c6c6"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/negativePic"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/n_pic"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/add_photo" />
+
+                <TextView
+                    android:id="@+id/n_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="反面"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tip3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driverLayout"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15dp"
+                android:text="请上传您的运营证照片（可选）"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/busiCardBtn"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_below="@+id/tip3"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="10dp"
+                android:background="#abc6c6c6"
+                android:scaleType="center"
+                android:src="@mipmap/add_photo" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/checkBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="10dp"
+            android:padding="7dp"
+            android:src="@mipmap/checkbox_selected" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="同意正统司机加盟服务条款"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/selectFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:padding="7dp"
+            android:text="查看条款"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,31 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.net.sip.SipAudioCall;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.GridView;
+import android.widget.RelativeLayout;
+
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/22.
+ */
+public class QuestionModel {
+    public GridView gridView;
+    public RelativeLayout chooseQuestionLayout,questionNav;
+    public EditText questionDes;
+
+    public void findViewByIds(Activity activity, View.OnClickListener listener){
+        chooseQuestionLayout = (RelativeLayout)activity.findViewById(R.id.choose_question_layout);
+        gridView = (GridView)activity.findViewById(R.id.question_photo_grid_view);
+        questionDes = (EditText)activity.findViewById(R.id.question_des_edit);
+        questionNav = (RelativeLayout)activity.findViewById(R.id.question_nav_layout);
+
+
+        chooseQuestionLayout.setOnClickListener(listener);
+
+    }
+
+}

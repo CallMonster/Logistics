@@ -1,0 +1,51 @@
+package com.zt.hackman.model;
+
+import android.app.Activity;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.zt.hackman.R;
+
+/**
+ * Created by Administrator on 2016/9/19.
+ */
+public class HackmanModel {
+    //界面一
+    public RelativeLayout oneFrontBtn,oneReserveBtn;
+
+    //界面二
+    public CheckBox checkBox;
+    public TextView watchClauseBtn;
+
+
+    public HackmanModel(Activity activity, View.OnClickListener listener,int current){
+        switch (current){
+            case 1:
+                initOne(activity,listener);
+                break;
+            case 2:
+                initTwo(activity,listener);
+                break;
+        }
+    }
+
+    private void initOne(Activity activity, View.OnClickListener listener){
+        oneFrontBtn = (RelativeLayout)activity.findViewById(R.id.oneFrontBtn);
+        oneReserveBtn = (RelativeLayout)activity.findViewById(R.id.oneReserveBtn);
+
+        oneFrontBtn.setOnClickListener(listener);
+        oneReserveBtn.setOnClickListener(listener);
+    }
+
+
+    private void initTwo(Activity activity,View.OnClickListener listener){
+        checkBox =(CheckBox) activity.findViewById(R.id.agreeCheck);
+        watchClauseBtn = (TextView)activity.findViewById(R.id.watch_hackman_clause_btn);
+
+        watchClauseBtn.setOnClickListener(listener);
+    }
+
+}

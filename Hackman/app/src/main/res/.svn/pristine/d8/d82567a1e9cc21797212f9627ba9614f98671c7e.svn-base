@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout android:background="@color/drak_transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/main_bg">
+    <include layout="@layout/nav_layout"
+        android:id="@+id/hackman_one_layout"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView style="@style/main_text"
+            android:text="请上传车辆照片"
+            android:layout_marginLeft="@dimen/space_30"/>
+        <TextView android:id="@+id/text_first_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tan"
+            android:text="范例"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_30"
+            android:textColor="@color/tab_seleted"
+            android:drawablePadding="@dimen/space_8"/>
+    </RelativeLayout>
+
+    <ImageView android:id="@+id/two_first_btn"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:src="@mipmap/add_photo"
+        android:scaleType="center"
+        android:background="@color/photo_bg"/>
+    <RelativeLayout android:layout_marginTop="@dimen/space_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView style="@style/main_text"
+            android:text="请上传行驶证照片"
+            android:layout_marginLeft="@dimen/space_30"/>
+        <TextView android:id="@+id/text_second_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tan"
+            android:text="范例"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_30"
+            android:textColor="@color/tab_seleted"
+            android:drawablePadding="@dimen/space_8"/>
+    </RelativeLayout>
+
+    <ImageView android:id="@+id/two_second_btn"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:src="@mipmap/add_photo"
+        android:background="@color/photo_bg"
+        android:scaleType="centerInside"/>
+    <RelativeLayout android:layout_marginTop="@dimen/space_15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView style="@style/main_text"
+            android:text="请上传行车证照片"
+            android:layout_marginLeft="@dimen/space_30"/>
+        <TextView android:id="@+id/text_third_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/tan"
+            android:text="范例"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/space_30"
+            android:textColor="@color/tab_seleted"
+            android:drawablePadding="@dimen/space_8"/>
+    </RelativeLayout>
+
+    <ImageView android:id="@+id/two_third_btn"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="15dp"
+        android:scaleType="centerInside"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:src="@mipmap/add_photo"
+        android:background="@color/photo_bg"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="@dimen/space_30"
+        android:layout_marginRight="@dimen/space_30"
+        android:layout_marginTop="@dimen/space_15">
+        <CheckBox android:id="@+id/agreeCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="同意正通司机服务条款"
+            android:textColor="@color/home_grey"
+            android:button="@drawable/check_selector"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/space_8"
+            />
+
+        <TextView android:id="@+id/watch_hackman_clause_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="查看条款"
+            android:textSize="@dimen/font_14"
+            android:textColor="@color/tab_seleted"
+            android:layout_alignParentRight="true"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
+</ScrollView>
+</FrameLayout>
